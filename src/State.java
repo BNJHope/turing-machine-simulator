@@ -37,6 +37,14 @@ public class State {
     }
 
     /**
+     * Get the label of this state.
+     * @return The label of this state.
+     */
+    public String getLabel() {
+        return this.label;
+    }
+
+    /**
      * Make a transition from this
      * state to the next state depending on
      * the input.
@@ -51,5 +59,14 @@ public class State {
 
     }
 
+    /**
+     * Add the given transition for the given input symbol.
+     * @param input The input letter that will cause this transition.
+     * @param transition The transition that will occur with the given input symbol.
+     */
+    public void addTransition(String input, Transition transition) {
+
+        this.transitions.put(input, transition);
+    }
 
 }

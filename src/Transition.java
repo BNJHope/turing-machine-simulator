@@ -17,4 +17,10 @@ public class Transition {
      * The next direction for the tape pointer to go in this transition.
      */
     private TapeTransitionDirection nextDirection;
+
+    public Transition(State nextState, String outputSymbol, TapeTransitionDirection nextDirection) {
+        this.nextState = nextState;
+        this.outputSymbol = outputSymbol;
+        this.nextDirection = nextDirection;
+    }
 }
