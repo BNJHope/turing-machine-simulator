@@ -29,6 +29,11 @@ public class TuringMachineFileParser {
     private Scanner fileScanner;
 
     /**
+     * Denotes the string used in a line that holds a comment.
+     */
+    private static final String COMMENT_REPRESENTATION = "#";
+
+    /**
      * Converts a Turing Machine input file
      * into an instance of a Turing Machine.
      * @param filename The input file for the Turing Machine
@@ -191,9 +196,39 @@ public class TuringMachineFileParser {
     }
 
     /**
-     * Get the individual components of the next line in the file.
-     * @return The next line in the file, split into separate components.
+     * Get the individual components of the next line in the file, so long as it
+     * is not a comment line.
+     * @return The next non-comment line in the file, split into separate components.
      */
-    private String[] getElementsOfNextLine() { return this.fileScanner.nextLine().split("\\s+");
+    private String[] getElementsOfNextLine() {
+
+        // keeps the loop condition while the line is a comment line.
+        boolean isComment = true;
+
+        //the next line read in from the file.
+        String line = "";
+
+        // keep looking for a line while the line is not a file
+        while(isComment) {
+
+            // get the next line from the file
+            line = fileScanner.nextLine();
+
+            /* If the line is a comment then exit the loop, otherwise
+            keep searching for a non-comment line. */
+            isComment = lineIsComment(line);
+
+        }
+
+        return line.split("\\s+");
+    }
+
+    /**
+     * Determines whether a given line if a comment or not.
+     * @param line The line to check if it is a comment or not
+     * @return True if line is comment, false if line is not comment.
+     */
+    private static boolean lineIsComment(String line) {
+        return line.substring(0, COMMENT_REPRESENTATION.length()).equals(COMMENT_REPRESENTATION);
     }
 }
