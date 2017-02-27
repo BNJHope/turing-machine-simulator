@@ -52,7 +52,7 @@ public class TuringMachineMain {
     private static void handleOutput(TuringMachineReturnCode result) {
 
         switch (result) {
-            case ACCPETED:
+            case ACCEPTED:
                 System.out.println("Accepted");
                 break;
             case REJECTED:

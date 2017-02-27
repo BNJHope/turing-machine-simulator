@@ -9,7 +9,7 @@ public enum TuringMachineReturnCode {
      * Return code for when an input
      * is accepted by the Turing Machine.
      */
-    ACCPETED,
+    ACCEPTED,
 
     /**
      * Return code for when an input

@@ -54,7 +54,7 @@ public class BuildUnitTests {
 
         String testFileName = testDirectory + "testAcceptShort.txt";
         TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
-        assertEquals(result, TuringMachineReturnCode.ACCPETED);
+        assertEquals(TuringMachineReturnCode.ACCEPTED, result);
 
     }
 
@@ -66,7 +66,7 @@ public class BuildUnitTests {
 
         String testFileName = testDirectory + "testAcceptNormalLength.txt";
         TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
-        assertEquals(result, TuringMachineReturnCode.ACCPETED);
+        assertEquals(TuringMachineReturnCode.ACCEPTED, result);
 
     }
 
@@ -78,7 +78,7 @@ public class BuildUnitTests {
 
         String testFileName = testDirectory + "testAcceptLong.txt";
         TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
-        assertEquals(result, TuringMachineReturnCode.ACCPETED);
+        assertEquals(TuringMachineReturnCode.ACCEPTED, result);
 
     }
 
@@ -90,7 +90,7 @@ public class BuildUnitTests {
 
         String testFileName = testDirectory + "testRejectShort.txt";
         TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
-        assertEquals(result, TuringMachineReturnCode.REJECTED);
+        assertEquals(TuringMachineReturnCode.REJECTED, result);
 
     }
 
@@ -102,7 +102,7 @@ public class BuildUnitTests {
 
         String testFileName = testDirectory + "testRejectNormalLength.txt";
         TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
-        assertEquals(result, TuringMachineReturnCode.REJECTED);
+        assertEquals(TuringMachineReturnCode.REJECTED, result);
 
     }
 
@@ -114,7 +114,7 @@ public class BuildUnitTests {
 
         String testFileName = testDirectory + "testRejectLong.txt";
         TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
-        assertEquals(result, TuringMachineReturnCode.REJECTED);
+        assertEquals(TuringMachineReturnCode.REJECTED, result);
 
     }
 
@@ -126,7 +126,7 @@ public class BuildUnitTests {
 
         String testFileName = testDirectory + "testEmpty.txt";
         TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
-        assertEquals(result, TuringMachineReturnCode.REJECTED);
+        assertEquals(TuringMachineReturnCode.REJECTED, result);
 
     }
 
@@ -138,7 +138,7 @@ public class BuildUnitTests {
 
         String testFileName = testDirectory + "testOneCharThenReject.txt";
         TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
-        assertEquals(result, TuringMachineReturnCode.REJECTED);
+        assertEquals(TuringMachineReturnCode.REJECTED, result);
 
     }
 
@@ -151,7 +151,7 @@ public class BuildUnitTests {
 
         String testFileName = testDirectory + "testTryToMoveFromAcceptState.txt";
         TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
-        assertEquals(result, TuringMachineReturnCode.ACCPETED);
+        assertEquals(TuringMachineReturnCode.ACCEPTED, result);
 
     }
 
@@ -164,7 +164,7 @@ public class BuildUnitTests {
 
         String testFileName = testDirectory + "testTryToMoveFromRejectState.txt";
         TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
-        assertEquals(result, TuringMachineReturnCode.REJECTED);
+        assertEquals(TuringMachineReturnCode.REJECTED, result);
 
     }
 

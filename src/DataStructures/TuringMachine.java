@@ -1,9 +1,5 @@
 package DataStructures;
 
-import DataStructures.State;
-import DataStructures.TapeSegment;
-import DataStructures.Transition;
-import DataStructures.TransitionParseObject;
 import Enums.TapeTransitionDirection;
 import Enums.TuringMachineReturnCode;
 import Parsers.TuringMachineFileParser;
@@ -86,6 +82,8 @@ public class TuringMachine {
             // the transition that will be made from the state with the given input symbol.
             Transition transitionToMake = currentState.makeTransition(tapeSymbol);
 
+            System.out.println("State transition : " + this.currentState.getLabel() + " -> " + tapeSymbol + " -> " + transitionToMake.getNextState().getLabel());
+
             // set the current state to the state that we go to in the transition.
             this.currentState = transitionToMake.getNextState();
 
@@ -133,7 +131,7 @@ public class TuringMachine {
             on the type of the state that the machine terminated in. */
             switch (currentState.getType()) {
                 case ACCEPT:
-                    return TuringMachineReturnCode.ACCPETED;
+                    return TuringMachineReturnCode.ACCEPTED;
                 case REJCECT:
                     return TuringMachineReturnCode.REJECTED;
                 default:
