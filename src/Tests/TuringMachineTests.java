@@ -1,6 +1,14 @@
 package Tests;
 
+import DataStructures.TuringMachine;
+import Enums.TuringMachineReturnCode;
+import Parsers.TuringMachineFileParser;
+import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.io.FileNotFoundException;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Automated tests class.
@@ -8,14 +16,156 @@ import org.junit.Test;
 public class TuringMachineTests {
 
     /**
+     * Directory with all of the test materials needed.
+     */
+    private static final String testDirectory = "../../TestFiles/";
+
+    /**
      * Name of the file that defines where the machine is.
      */
-    private static final String machineFileName = "../../TestFiles/machine_input.txt";
+    private static final String machineFileName = testDirectory + "machine_input.txt";
 
-    @Test
-    public void testAcceptNormalLength() {
+    /**
+     * The Turing machine to be used in the tests.
+     */
+    private TuringMachine tm;
+
+    /**
+     * Create the Turing machine from the file before we run the tests.
+     */
+    @BeforeClass
+    public void createFactory() {
+
+        TuringMachineFileParser parser = new TuringMachineFileParser();
+
+        try {
+            this.tm = parser.parseFile(machineFileName);
+        } catch (FileNotFoundException e) {
+            System.err.println("Machine file not found");
+        }
 
     }
 
+    /**
+     * Test the Turing machine accepts acceptable files with short lengths.
+     */
+    @Test
+    public void testAcceptShortLength() {
+
+        String testFileName = testDirectory + "testAcceptShort.txt";
+        TuringMachineReturnCode result = this.tm.checkIfInputIsAccepted(testFileName);
+        assertEquals(result, TuringMachineReturnCode.ACCPETED);
+
+    }
+
+    /**
+     * Test the Turing machine accepts acceptable files with normal lengths.
+     */
+    @Test
+    public void testAcceptNormalLength() {
+
+        String testFileName = testDirectory + "testAcceptNormalLength.txt";
+        TuringMachineReturnCode result = this.tm.checkIfInputIsAccepted(testFileName);
+        assertEquals(result, TuringMachineReturnCode.ACCPETED);
+
+    }
+
+    /**
+     * Test the Turing machine accepts acceptable files with long lengths.
+     */
+    @Test
+    public void testAcceptLongLength() {
+
+        String testFileName = testDirectory + "testAcceptLong.txt";
+        TuringMachineReturnCode result = this.tm.checkIfInputIsAccepted(testFileName);
+        assertEquals(result, TuringMachineReturnCode.ACCPETED);
+
+    }
+
+    /**
+     * Test the Turing machine rejects invalid files with short lengths.
+     */
+    @Test
+    public void testRejectShortLength() {
+
+        String testFileName = testDirectory + "testRejectShort.txt";
+        TuringMachineReturnCode result = this.tm.checkIfInputIsAccepted(testFileName);
+        assertEquals(result, TuringMachineReturnCode.REJECTED);
+
+    }
+
+    /**
+     * Test the Turing machine rejects invalid files with normal lengths.
+     */
+    @Test
+    public void testRejectNormalLength() {
+
+        String testFileName = testDirectory + "testRejectNormalLength.txt";
+        TuringMachineReturnCode result = this.tm.checkIfInputIsAccepted(testFileName);
+        assertEquals(result, TuringMachineReturnCode.REJECTED);
+
+    }
+
+    /**
+     * Test the Turing machine rejects invalid files with long lengths.
+     */
+    @Test
+    public void testRejectLongLength() {
+
+        String testFileName = testDirectory + "testRejectLong.txt";
+        TuringMachineReturnCode result = this.tm.checkIfInputIsAccepted(testFileName);
+        assertEquals(result, TuringMachineReturnCode.REJECTED);
+
+    }
+
+    /**
+     * Test the Turing machine rejects the empty file for this Turing machine.
+     */
+    @Test
+    public void testEmpty() {
+
+        String testFileName = testDirectory + "testEmpty.txt";
+        TuringMachineReturnCode result = this.tm.checkIfInputIsAccepted(testFileName);
+        assertEquals(result, TuringMachineReturnCode.REJECTED);
+
+    }
+
+    /**
+     * Test the Turing machine rejects for the file with one 'a' character.
+     */
+    @Test
+    public void testRejectSingleRejectableCharacter() {
+
+        String testFileName = testDirectory + "testOneCharThenReject.txt";
+        TuringMachineReturnCode result = this.tm.checkIfInputIsAccepted(testFileName);
+        assertEquals(result, TuringMachineReturnCode.REJECTED);
+
+    }
+
+    /**
+     * Test that the Turing machine remains in accepting state after an acceptable
+     * string, even if more symbols appear.
+     */
+    @Test
+    public void testAcceptStateDoesNotChange() {
+
+        String testFileName = testDirectory + "testTryToMoveFromAcceptState.txt";
+        TuringMachineReturnCode result = this.tm.checkIfInputIsAccepted(testFileName);
+        assertEquals(result, TuringMachineReturnCode.ACCPETED);
+
+    }
+
+    /**
+     * Test that the Turing machine remains in reject state after an rejected
+     * string, even if more symbols appear.
+     */
+    @Test
+    public void testRejectStateDoesNotChange() {
+
+        String testFileName = testDirectory + "testTryToMoveFromRejectState.txt";
+        TuringMachineReturnCode result = this.tm.checkIfInputIsAccepted(testFileName);
+        assertEquals(result, TuringMachineReturnCode.REJECTED);
+
+    }
 
 }
