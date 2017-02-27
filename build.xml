@@ -1,0 +1,67 @@
+<project name="TuringMachineParser" basedir=".">
+
+    <!-- set global properties for this build -->
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="build"/>
+    <property name="classes.dir" value="${build.dir}/classes"/>
+    <property name="jar.dir" value="${build.dir}/jar"/>
+    <property name="lib" location="Libraries"/>
+    <property name="test.build.dir" location="${classes.dir}/Tests"/>
+    <property name="report.dir" value="${build.dir}/junitreport"/>
+    <property name="test.src.dir" location="${src.dir}/Tests"/>
+
+
+    <path id="test.path">
+        <pathelement location="${lib}/junit-4.12.jar"/>
+        <pathelement location="${lib}/hamcrest-core-1.3.jar"/>
+    </path>
+
+    <path id="build.path">
+        <pathelement location="${lib}/junit-4.12.jar"/>
+    </path>
+
+    <target name="compile">
+
+        <mkdir dir="${build.dir}"/>
+        <javac includeantruntime="false" srcdir="${src.dir}" destdir="${build.dir}">
+            <classpath>
+                <path refid="build.path"/>
+            </classpath>
+        </javac>
+
+    </target>
+
+    <target name="jar" depends="compile">
+
+        <!-- Create the distribution directory -->
+        <mkdir dir="${jar.dir}"/>
+
+        <!-- Put everything in ${build} into the AdaptiveHuffmanCoding.jar file -->
+        <jar jarfile="${jar.dir}/HexToDec.jar" basedir="${classes.dir}">
+        </jar>
+
+    </target>
+
+    <target name="junit" depends="jar">
+
+        <mkdir dir="${report.dir}"/>
+
+        <junit printsummary="yes" haltonfailure="no">
+            <classpath>
+                <path refid="test.path"/>
+                <pathelement location="${build.dir}"/>
+            </classpath>
+
+            <formatter type="plain"/>
+
+            <test name="HexToDec.Tests.HexToDecConverterTests" haltonfailure="no" todir="${report.dir}"/>
+
+        </junit>
+
+    </target>
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+
+</project>

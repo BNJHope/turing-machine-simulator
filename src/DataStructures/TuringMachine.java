@@ -6,6 +6,7 @@ import DataStructures.Transition;
 import DataStructures.TransitionParseObject;
 import Enums.TapeTransitionDirection;
 import Enums.TuringMachineReturnCode;
+import Parsers.TuringMachineFileParser;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -57,6 +58,14 @@ public class TuringMachine {
      */
     public TuringMachineReturnCode checkIfInputIsAccepted(String inputFileName) {
 
+        /* The previous direction - needed in case we need to make new
+        tape segments. */
+        TapeTransitionDirection previousDirection = null;
+
+        /* The previous tape segment - needed if we need to make new
+        tape segments. */
+        TapeSegment previousTapeSegment = null;
+
         /* Create the tape for the machine from the file.
         If the method returns false then there was an error in
         reading the tape and we need to exit. */
@@ -69,8 +78,11 @@ public class TuringMachine {
         // While we have not reached a terminating state, operate the machine.
         while (!currentState.isTerminatingState()) {
 
-            // the symbol on the current tape segment.
-            String tapeSymbol = this.currentTapeSegment.getSymbol();
+            /* If the tape segment is null then it is treated like
+            a blank character. If it is not null, then we read the symbol */
+            String tapeSymbol = (this.currentTapeSegment == null)
+                    ? TuringMachineFileParser.BLANK_CHAR
+                    : this.currentTapeSegment.getSymbol();
 
             // the transition that will be made from the state with the given input symbol.
             Transition transitionToMake = currentState.makeTransition(tapeSymbol);
@@ -78,8 +90,30 @@ public class TuringMachine {
             // set the current state to the state that we go to in the transition.
             this.currentState = transitionToMake.getNextState();
 
-            // write the new output symbol to the current tape segment.
-            this.currentTapeSegment.writeSymbolToTape(transitionToMake.getOutputSymbol());
+            /* If this is a new tape segment, then we create a new tape segment object
+             to write the output symbol to and stitch it to the previous part. */
+            if(currentTapeSegment == null) {
+
+                TapeSegment newTapeSegment = new TapeSegment(transitionToMake.getOutputSymbol());
+
+                switch (previousDirection) {
+                    case RIGHT:
+                        newTapeSegment.setLeft(previousTapeSegment);
+                        previousTapeSegment.setRight(newTapeSegment);
+                    case LEFT:
+                        newTapeSegment.setRight(previousTapeSegment);
+                        previousTapeSegment.setLeft(newTapeSegment);
+                }
+
+            /* Otherwise, simply write the output symbol
+            to current tape segment. */
+            } else
+                // write the new output symbol to the current tape segment.
+                this.currentTapeSegment.writeSymbolToTape(transitionToMake.getOutputSymbol());
+
+            previousTapeSegment = this.currentTapeSegment;
+
+            previousDirection = transitionToMake.getNextDirection();
 
             // move left or right depending on the direction from the transition.
             this.currentTapeSegment = (transitionToMake.getNextDirection().equals(TapeTransitionDirection.RIGHT))
@@ -87,16 +121,24 @@ public class TuringMachine {
                     : this.currentTapeSegment.getLeftSegment();
         }
 
-        /* Return the appropriate result code depending
-        on the type of the state that the machine terminated in. */
-        switch (currentState.getType()) {
-            case ACCEPT:
-                return TuringMachineReturnCode.ACCPETED;
-            case REJCECT:
-                return TuringMachineReturnCode.REJECTED;
-            default:
-                return TuringMachineReturnCode.UNEXPECTED_TERMINATION;
+        // if the machine did end on a terminating state
+        if(currentState != null) {
+            /* Return the appropriate result code depending
+            on the type of the state that the machine terminated in. */
+            switch (currentState.getType()) {
+                case ACCEPT:
+                    return TuringMachineReturnCode.ACCPETED;
+                case REJCECT:
+                    return TuringMachineReturnCode.REJECTED;
+                default:
+                    return TuringMachineReturnCode.UNEXPECTED_TERMINATION;
+            }
+
+        // if it did not end on a terminating state
+        } else {
+            return TuringMachineReturnCode.UNEXPECTED_TERMINATION;
         }
+
 
     }
 
