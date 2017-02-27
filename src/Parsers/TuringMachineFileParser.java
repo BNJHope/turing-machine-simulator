@@ -54,14 +54,14 @@ public class TuringMachineFileParser {
         ArrayList<String> tapeAlphabet = this.parseAlphabetLine();
 
         /* the number of transitions in this Turing machine - equal to
-        the number of states in the machine * (the size of the tape alphabet) */
-        int numberOfTransistions = numOfStates * (tapeAlphabet.size());
+        the (number of states in the machine without terminating states) * (the size of the tape alphabet) */
+        int numberOfTransitions = (numOfStates - 2) * (tapeAlphabet.size());
 
         // get the alphabet line from the file
         tm.addAlphabet(tapeAlphabet);
 
         // read all of the transitions from the file and add them to the machine
-        for(int transitionStepper = 0; transitionStepper < numberOfTransistions; transitionStepper++) {
+        for(int transitionStepper = 0; transitionStepper < numberOfTransitions; transitionStepper++) {
             tm.addTransition(this.parseTransition(tm));
         }
 
@@ -76,7 +76,8 @@ public class TuringMachineFileParser {
      * @return The integer of how many states there are in the machine.
      */
     private int parseNumberOfStates() {
-        return Integer.parseInt(this.getElementsOfNextLine()[1]);
+        String elements[] = this.getElementsOfNextLine();
+        return Integer.parseInt(elements[1]);
     }
 
     /**
@@ -198,7 +199,6 @@ public class TuringMachineFileParser {
      * Get the individual components of the next line in the file.
      * @return The next line in the file, split into separate components.
      */
-    private String[] getElementsOfNextLine() {
-        return this.fileScanner.nextLine().split("s+");
+    private String[] getElementsOfNextLine() { return this.fileScanner.nextLine().split("\\s+");
     }
 }

@@ -76,7 +76,7 @@ public class TuringMachine {
         this.currentState = this.states.get(START_LABEL);
 
         // While we have not reached a terminating state, operate the machine.
-        while (!currentState.isTerminatingState()) {
+        while (!this.currentState.isTerminatingState()) {
 
             /* If the tape segment is null then it is treated like
             a blank character. If it is not null, then we read the symbol */
@@ -100,19 +100,26 @@ public class TuringMachine {
                     case RIGHT:
                         newTapeSegment.setLeft(previousTapeSegment);
                         previousTapeSegment.setRight(newTapeSegment);
+                        break;
                     case LEFT:
                         newTapeSegment.setRight(previousTapeSegment);
                         previousTapeSegment.setLeft(newTapeSegment);
+                        break;
                 }
+
+                currentTapeSegment = newTapeSegment;
 
             /* Otherwise, simply write the output symbol
             to current tape segment. */
-            } else
-                // write the new output symbol to the current tape segment.
-                this.currentTapeSegment.writeSymbolToTape(transitionToMake.getOutputSymbol());
+            } else this.currentTapeSegment.writeSymbolToTape(transitionToMake.getOutputSymbol());
 
+            /* Set the previous tape segment to the current tape segment
+            for the next iteration. */
             previousTapeSegment = this.currentTapeSegment;
 
+            /*
+            Set the previous direction ready for the next iteration.
+             */
             previousDirection = transitionToMake.getNextDirection();
 
             // move left or right depending on the direction from the transition.
@@ -152,7 +159,7 @@ public class TuringMachine {
 
         /* The constant that means the file reader has reached the
         end of file. */
-        final int EOF = -1;
+        final int EOF_CONST = -1;
 
         // input stream for the file that is being read.
         FileInputStream inputFileStream;
@@ -181,7 +188,7 @@ public class TuringMachine {
         /* Try to read the input file to the end and make the tape at
            the same time. */
         try {
-            while ((nextToken = (char) inputFileStream.read()) != EOF) {
+            while ((nextToken = (char) inputFileStream.read()) != (char) EOF_CONST) {
 
                 // Convert the character read from the file into a string
                 input = Character.toString(nextToken);
@@ -195,9 +202,10 @@ public class TuringMachine {
                        to the left of this tape segment. */
                     TapeSegment nextTapeSegment = new TapeSegment(input, previousTapeSegment);
 
-                    /* Set the tape segment to the right of the previous tape segment
-                       as the new tape segment that was created. */
-                    previousTapeSegment.setRight(nextTapeSegment);
+                    /* If there has been a previous tape segment then
+                    set the tape segment to the right of the previous tape segment
+                    as the new tape segment that was created. */
+                    if(previousTapeSegment != null) previousTapeSegment.setRight(nextTapeSegment);
 
                     /* Update the previous tape segment value, ready for the next tape segment
                        to use as its tape segment piece to the left. */

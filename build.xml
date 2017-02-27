@@ -10,7 +10,6 @@
     <property name="report.dir" value="${build.dir}/junitreport"/>
     <property name="test.src.dir" location="${src.dir}/Tests"/>
 
-
     <path id="test.path">
         <pathelement location="${lib}/junit-4.12.jar"/>
         <pathelement location="${lib}/hamcrest-core-1.3.jar"/>
@@ -22,8 +21,8 @@
 
     <target name="compile">
 
-        <mkdir dir="${build.dir}"/>
-        <javac includeantruntime="false" srcdir="${src.dir}" destdir="${build.dir}">
+        <mkdir dir="${classes.dir}"/>
+        <javac includeantruntime="false" debug="true" srcdir="${src.dir}" destdir="${classes.dir}">
             <classpath>
                 <path refid="build.path"/>
             </classpath>
@@ -36,8 +35,11 @@
         <!-- Create the distribution directory -->
         <mkdir dir="${jar.dir}"/>
 
-        <!-- Put everything in ${build} into the AdaptiveHuffmanCoding.jar file -->
-        <jar jarfile="${jar.dir}/HexToDec.jar" basedir="${classes.dir}">
+        <!-- Put everything in ${classes.dir} into the AdaptiveHuffmanCoding.jar file -->
+        <jar jarfile="${jar.dir}/TuringMachine.jar" basedir="${classes.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="Main.TuringMachineMain"/>
+            </manifest>
         </jar>
 
     </target>
@@ -45,7 +47,6 @@
     <target name="junit" depends="jar">
 
         <mkdir dir="${report.dir}"/>
-
         <junit printsummary="yes" haltonfailure="no">
             <classpath>
                 <path refid="test.path"/>
@@ -53,11 +54,8 @@
             </classpath>
 
             <formatter type="plain"/>
-
-            <test name="HexToDec.Tests.HexToDecConverterTests" haltonfailure="no" todir="${report.dir}"/>
-
+            <test name="Tests.TuringMachineTests" haltonfailure="no" todir="${report.dir}"/>
         </junit>
-
     </target>
 
     <target name="clean">
