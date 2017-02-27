@@ -1,7 +1,7 @@
 /**
  * A segment in the Turing Machine tape.
  */
-public class TapeSegment implements ITapeSegment{
+public class TapeSegment {
 
     /**
      * The tape segment to the left of this tape segment.
@@ -19,16 +19,14 @@ public class TapeSegment implements ITapeSegment{
     private String symbol;
 
     /**
-     * Constructor for tape segment, given symbol and surrounding states.
+     * Constructor for tape segment, given symbol and previous state.
      * @param symbol The symbol on the tape.
      * @param left The segment to the left of this tape segment.
-     * @param right The segment to the right of this tape segment.
      */
-    public TapeSegment(String symbol, TapeSegment left, TapeSegment right) {
+    public TapeSegment(String symbol, TapeSegment left) {
 
         this.symbol = symbol;
         this.left = left;
-        this.right = right;
     }
 
     /**
@@ -59,8 +57,7 @@ public class TapeSegment implements ITapeSegment{
      * Get the symbol on this tape segment.
      * @return Symbol on this tape segment.
      */
-    @Override
-    public String getTapeInput() {
+    public String getSymbol() {
         return this.symbol;
     }
 
@@ -68,26 +65,23 @@ public class TapeSegment implements ITapeSegment{
      * Write the given symbol onto the tape segment.
      * @param symbol The symbol to write to this tape segment.
      */
-    @Override
     public void writeSymbolToTape(String symbol) {
         this.symbol = symbol;
     }
 
     /**
      * Get the tape segment to the left of this tape segment.
-     * @return
+     * @return The segment to the left of this tape segment.
      */
-    @Override
-    public ITapeSegment moveLeft() {
+    public TapeSegment getLeftSegment() {
         return this.left;
     }
 
     /**
      * Get the tape segment to the right of this tape segment.
-     * @return
+     * @return The segment to the right of this tape segment.
      */
-    @Override
-    public ITapeSegment moveRight() {
+    public TapeSegment getRightSegment() {
         return this.right;
     }
 }

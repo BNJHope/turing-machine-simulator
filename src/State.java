@@ -16,24 +16,13 @@ public class State {
     private String label;
 
     /**
-     * Boolean determining if this is the accept state in the machine.
+     * Determines if this is a normal state or a terminating state.
      */
-    private boolean isAcceptState;
+    private TuringMachineStateType type;
 
-    /**
-     * Boolean determining if this is the reject state in the machine.
-     */
-    private boolean isRejectState;
-
-    public State(String label) {
+    public State(String label, TuringMachineStateType type) {
         this.label = label;
-    }
-
-    public State(String label, boolean isAcceptState, boolean isRejectState) {
-        this.transitions = transitions;
-        this.label = label;
-        this.isAcceptState = isAcceptState;
-        this.isRejectState = isRejectState;
+        this.type = type;
     }
 
     /**
@@ -65,8 +54,23 @@ public class State {
      * @param transition The transition that will occur with the given input symbol.
      */
     public void addTransition(String input, Transition transition) {
-
         this.transitions.put(input, transition);
     }
 
+    /**
+     * Get the type of this state.
+     * @return The type of this state.
+     */
+    public TuringMachineStateType getType() {
+        return this.type;
+    }
+
+    /**
+     * Returns whether or not this state is an accept or reject state.
+     * @return true if it is a terminating state, false if not.
+     */
+    public boolean isTerminatingState() {
+        return this.type.equals(TuringMachineStateType.ACCEPT)
+                || this.type.equals(TuringMachineStateType.REJCECT);
+    }
 }

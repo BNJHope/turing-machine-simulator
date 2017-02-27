@@ -23,4 +23,16 @@ public class Transition {
         this.outputSymbol = outputSymbol;
         this.nextDirection = nextDirection;
     }
+
+    public State getNextState() {
+        return nextState;
+    }
+
+    public String getOutputSymbol() {
+        return outputSymbol;
+    }
+
+    public TapeTransitionDirection getNextDirection() {
+        return nextDirection;
+    }
 }

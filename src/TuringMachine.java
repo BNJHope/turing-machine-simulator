@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -27,6 +31,141 @@ public class TuringMachine {
     private ArrayList<String> alphabet;
 
     /**
+     * The label of the start state in the Turing machine.
+     */
+    public final String START_LABEL = "q0";
+
+    /**
+     * Determines if this Turing machine accepts the given input.
+     * @param inputFileName The input file to examine.
+     * @return The result from running the input through the machine.
+     */
+    public TuringMachineReturnCode checkIfInputIsAccepted(String inputFileName) {
+
+        /* Create the tape for the machine from the file.
+        If the method returns false then there was an error in
+        reading the tape and we need to exit. */
+        if(!this.createTapeFromFile(inputFileName))
+            System.exit(1);
+
+        // Get the start state from the collection of states.
+        this.currentState = this.states.get(START_LABEL);
+
+        // While we have not reached a terminating state, operate the machine.
+        while(!currentState.isTerminatingState()) {
+
+            // the symbol on the current tape segment.
+            String tapeSymbol = this.currentTapeSegment.getSymbol();
+
+            // the transition that will be made from the state with the given input symbol.
+            Transition transitionToMake = currentState.makeTransition(tapeSymbol);
+
+            // set the current state to the state that we go to in the transition.
+            this.currentState = transitionToMake.getNextState();
+
+            // write the new output symbol to the current tape segment.
+            this.currentTapeSegment.writeSymbolToTape(transitionToMake.getOutputSymbol());
+
+            // move left or right depending on the direction from the transition.
+            this.currentTapeSegment = (transitionToMake.getNextDirection().equals(TapeTransitionDirection.RIGHT))
+                    ? this.currentTapeSegment.getRightSegment()
+                    : this.currentTapeSegment.getLeftSegment();
+        }
+
+        /* Return the appropriate result code depending
+        on the type of the state that the machine terminated in. */
+        switch (currentState.getType()) {
+            case ACCEPT:
+                return TuringMachineReturnCode.ACCPETED;
+            case REJCECT:
+                return TuringMachineReturnCode.REJECTED;
+            default:
+                return TuringMachineReturnCode.UNEXPECTED_TERMINATION;
+        }
+
+    }
+
+    /**
+     * Construct the tape from the input file.
+     * @param filename The name of the file with the tape.
+     * @return True if tape was read successfully, false if not.
+     */
+    public boolean createTapeFromFile(String filename){
+
+        // input stream for the file that is being read.
+        FileInputStream inputFileStream = null;
+
+        // the next token in the input file.
+        char nextToken;
+
+        // the input from the file interpreted as a string
+        String input;
+
+        // the previous tape segment that was read.
+        TapeSegment previousTapeSegment = null;
+
+        /* determines whether the first segment has been read yet
+         or not from the file, since the first segment needs to be stored. */
+        boolean firstSegmentRead = false;
+
+        // try to set up the stream from the input file
+        try {
+            inputFileStream = new FileInputStream(new File(filename));
+        } catch (FileNotFoundException e) {
+            System.err.println("Input file not found");
+            return false;
+        }
+
+        /* Try to read the input file to the end and make the tape at
+           the same time. */
+        try {
+            while((nextToken = (char) inputFileStream.read()) != -1) {
+
+                //convert the character read from the file into a string
+                input = Character.toString(nextToken);
+
+                /* If the symbol that has been read is in the input alphabet
+                   then add it to the tape. Otherwise, return an error. */
+                if(this.alphabet.contains(input)) {
+
+                    /* Make a new tape statement, using the input read from the file
+                       as the symbol on the tape and the previous tape segment as the tape segment
+                       to the left of this tape segment. */
+                    TapeSegment nextTapeSegment = new TapeSegment(input, previousTapeSegment);
+
+                    /* Set the tape segment to the right of the previous tape segment
+                       as the new tape segment that was created. */
+                    previousTapeSegment.setRight(nextTapeSegment);
+
+                    /* Update the previous tape segment value, ready for the next tape segment
+                       to use as its tape segment piece to the left. */
+                    previousTapeSegment = nextTapeSegment;
+
+                    /* If this is the first segment, then set the Turing machine's
+                        next tape segment to read as the first segment. */
+                    if(!firstSegmentRead) {
+                        firstSegmentRead = true;
+                        this.currentTapeSegment = nextTapeSegment;
+                    }
+
+                /* If the character that we read is not in the tape alphabet
+                   then return an error. */
+                } else {
+                    System.err.println("Character " + input + " not in tape alphabet.");
+                    return false;
+                }
+
+            }
+
+        } catch (IOException e) {
+            System.err.println("Error while reading input file");
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Stores the given state in the hashmap of states, using the state label as its key.
      * @param state The state to add to the hashmap.
      */
@@ -50,7 +189,6 @@ public class TuringMachine {
         this.states.get(tpo.startStateLabel).addTransition(tpo.inputSymbol, tpo.transition);
     }
 
-
     /**
      * Gets the state with the given label.
      * @param label The label of the state to get.
@@ -59,4 +197,5 @@ public class TuringMachine {
     public State getState(String label) {
         return this.states.get(label);
     }
+
 }
