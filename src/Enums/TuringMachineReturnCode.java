@@ -1,3 +1,5 @@
+package Enums;
+
 /**
  * Set of return codes from the
  */

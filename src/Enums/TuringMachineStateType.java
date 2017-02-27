@@ -1,3 +1,5 @@
+package Enums;
+
 /**
  * Determines what type of state a state is, i.e if its an accept, reject or ordinary state.
  */

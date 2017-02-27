@@ -1,3 +1,12 @@
+package Parsers;
+
+import DataStructures.State;
+import DataStructures.Transition;
+import DataStructures.TransitionParseObject;
+import DataStructures.TuringMachine;
+import Enums.TapeTransitionDirection;
+import Enums.TuringMachineStateType;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;

@@ -1,9 +1,19 @@
+package DataStructures;
+
+import DataStructures.State;
+import DataStructures.TapeSegment;
+import DataStructures.Transition;
+import DataStructures.TransitionParseObject;
+import Enums.TapeTransitionDirection;
+import Enums.TuringMachineReturnCode;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+
 
 /**
  * A Turing Machine simulation.
@@ -33,10 +43,15 @@ public class TuringMachine {
     /**
      * The label of the start state in the Turing machine.
      */
-    public final String START_LABEL = "q0";
+    private static final String START_LABEL = "q0";
+
+    public TuringMachine() {
+     this.states = new HashMap();
+    }
 
     /**
      * Determines if this Turing machine accepts the given input.
+     *
      * @param inputFileName The input file to examine.
      * @return The result from running the input through the machine.
      */
@@ -45,14 +60,14 @@ public class TuringMachine {
         /* Create the tape for the machine from the file.
         If the method returns false then there was an error in
         reading the tape and we need to exit. */
-        if(!this.createTapeFromFile(inputFileName))
+        if (!this.createTapeFromFile(inputFileName))
             System.exit(1);
 
         // Get the start state from the collection of states.
         this.currentState = this.states.get(START_LABEL);
 
         // While we have not reached a terminating state, operate the machine.
-        while(!currentState.isTerminatingState()) {
+        while (!currentState.isTerminatingState()) {
 
             // the symbol on the current tape segment.
             String tapeSymbol = this.currentTapeSegment.getSymbol();
@@ -87,13 +102,18 @@ public class TuringMachine {
 
     /**
      * Construct the tape from the input file.
+     *
      * @param filename The name of the file with the tape.
      * @return True if tape was read successfully, false if not.
      */
-    public boolean createTapeFromFile(String filename){
+    private boolean createTapeFromFile(String filename) {
+
+        /* The constant that means the file reader has reached the
+        end of file. */
+        final int EOF = -1;
 
         // input stream for the file that is being read.
-        FileInputStream inputFileStream = null;
+        FileInputStream inputFileStream;
 
         // the next token in the input file.
         char nextToken;
@@ -119,14 +139,14 @@ public class TuringMachine {
         /* Try to read the input file to the end and make the tape at
            the same time. */
         try {
-            while((nextToken = (char) inputFileStream.read()) != -1) {
+            while ((nextToken = (char) inputFileStream.read()) != EOF) {
 
-                //convert the character read from the file into a string
+                // Convert the character read from the file into a string
                 input = Character.toString(nextToken);
 
                 /* If the symbol that has been read is in the input alphabet
                    then add it to the tape. Otherwise, return an error. */
-                if(this.alphabet.contains(input)) {
+                if (this.alphabet.contains(input)) {
 
                     /* Make a new tape statement, using the input read from the file
                        as the symbol on the tape and the previous tape segment as the tape segment
@@ -143,7 +163,7 @@ public class TuringMachine {
 
                     /* If this is the first segment, then set the Turing machine's
                         next tape segment to read as the first segment. */
-                    if(!firstSegmentRead) {
+                    if (!firstSegmentRead) {
                         firstSegmentRead = true;
                         this.currentTapeSegment = nextTapeSegment;
                     }
@@ -166,8 +186,9 @@ public class TuringMachine {
     }
 
     /**
-     * Stores the given state in the hashmap of states, using the state label as its key.
-     * @param state The state to add to the hashmap.
+     * Stores the given state in the hash map of states, using the state label as its key.
+     *
+     * @param state The state to add to the hash map.
      */
     public void addState(State state) {
         this.states.put(state.getLabel(), state);
@@ -175,6 +196,7 @@ public class TuringMachine {
 
     /**
      * Set the alphabet as the alphabet given to the function.
+     *
      * @param alphabet The alphabet to set as the tape alphabet for this machine.
      */
     public void addAlphabet(ArrayList<String> alphabet) {
@@ -183,6 +205,7 @@ public class TuringMachine {
 
     /**
      * Add the given transition to the machine.
+     *
      * @param tpo The transition data to add to the machine.
      */
     public void addTransition(TransitionParseObject tpo) {
@@ -191,6 +214,7 @@ public class TuringMachine {
 
     /**
      * Gets the state with the given label.
+     *
      * @param label The label of the state to get.
      * @return The state with this label.
      */

@@ -1,3 +1,5 @@
+package DataStructures;
+
 /**
  * A segment in the Turing Machine tape.
  */

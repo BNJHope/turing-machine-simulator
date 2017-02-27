@@ -1,3 +1,5 @@
+package Enums;
+
 /**
  * Enum for the direction to go next in the tape.
  */

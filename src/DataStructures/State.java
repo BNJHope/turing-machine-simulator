@@ -1,7 +1,10 @@
+package DataStructures;
+
 import java.util.HashMap;
+import Enums.TuringMachineStateType;
 
 /**
- * State in a Turing Machine
+ * DataStructures.State in a Turing Machine
  */
 public class State {
 

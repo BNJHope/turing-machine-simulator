@@ -1,3 +1,7 @@
+package DataStructures;
+
+import Enums.TapeTransitionDirection;
+
 /**
  * Data structure representing a transition.
  */
