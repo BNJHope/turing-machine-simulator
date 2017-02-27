@@ -202,25 +202,37 @@ public class TuringMachineFileParser {
      */
     private String[] getElementsOfNextLine() {
 
-        // keeps the loop condition while the line is a comment line.
-        boolean isComment = true;
+        // keeps the loop condition while the line is a comment line, empty or whitespace.
+        boolean shouldIgnoreLine = true;
 
         //the next line read in from the file.
         String line = "";
 
-        // keep looking for a line while the line is not a file
-        while(isComment) {
+        // keep looking for a line while the line is not empty, whitespace or comment
+        while(shouldIgnoreLine) {
 
             // get the next line from the file
             line = fileScanner.nextLine();
 
-            /* If the line is a comment then exit the loop, otherwise
+            System.out.println("Line : " + line);
+            System.out.println("Line is null : " + (line == null));
+            /* If the line is a comment, empty or whitespace then exit the loop, otherwise
             keep searching for a non-comment line. */
-            isComment = lineIsComment(line);
+            shouldIgnoreLine = !lineIsMeaningful(line);
 
+            System.out.println("Should ignore line : " + shouldIgnoreLine);
         }
 
         return line.split("\\s+");
+    }
+
+    /**
+     * Deterines whether given line has content required for machine.
+     * @param line The line to check
+     * @return True if line is meaninful, false is not.
+     */
+    private static boolean lineIsMeaningful(String line) {
+        return !(lineIsEmpty(line) || lineIsComment(line) || lineIsWhitespace(line));
     }
 
     /**
@@ -230,5 +242,23 @@ public class TuringMachineFileParser {
      */
     private static boolean lineIsComment(String line) {
         return line.substring(0, COMMENT_REPRESENTATION.length()).equals(COMMENT_REPRESENTATION);
+    }
+
+    /**
+     * Determines whether a given line is whitespace or not.
+     * @param line The line to check if it is whitespace or not
+     * @return True if line is whitespace, false if line is not whitespace.
+     */
+    private static boolean lineIsWhitespace(String line) {
+        return line.matches("\\s+");
+    }
+
+    /**
+     * Determines whether a given line is empty or not.
+     * @param line The line to check if is empty.
+     * @return True if line is empty, false is line is not empty.
+     */
+    private static boolean lineIsEmpty(String line) {
+        return line.isEmpty();
     }
 }
