@@ -18,7 +18,7 @@ public class TuringMachineTests {
     /**
      * Directory with all of the test materials needed.
      */
-    private static final String testDirectory = "/home/bnjhope/Documents/School/CS3000/CC/CC-P1-Java/TestFiles/";
+    private static final String testDirectory = "../../TestFiles/";
 
     /**
      * Name of the file that defines where the machine is.

@@ -1,0 +1,106 @@
+# Palindrome problem
+states 16
+
+# Start state
+q0
+
+# After the start state, depending on the input of {a,b,c}
+# the machine keeps reading to the right on one of these states
+# until it reaches the end of the input - i.e until it reaches a blank character
+q1
+q2
+q3
+
+# While in one of these states, we check to see if the next character is
+# the same as the character at the beginning of the word - if they do not match,
+# reject.
+q4
+q5
+q6
+
+# Similar to q0, but going from the end of the word to the beginning.
+q7
+
+# Next waiting states for {a,b,c}
+q8
+q9
+q10
+
+# After seeing a blank character go to these states depending on {a,b,c} to check for palindrome
+q11
+q12
+q13
+
+qa +
+qr -
+alphabet 3 a b c
+
+q0 a q1 a R
+q0 b q2 b R
+q0 c q3 c R
+q0 _ qa _ R
+
+q1 a q1 a R
+q1 b q1 b R
+q1 c q1 c R
+q1 _ q4 _ L
+
+q2 a q2 a R
+q2 b q2 b R
+q2 c q2 c R
+q2 _ q5 _ L
+
+q3 a q3 a R
+q3 b q3 b R
+q3 c q3 c R
+q3 _ q6 _ L
+
+q4 a q7 _ L
+q4 b qr _ L
+q4 c qr _ L
+q4 _ qr _ R
+
+q5 a qr _ L
+q5 b q7 _ L
+q5 c qr _ L
+q5 _ qr _ R
+
+q6 a qr _ L
+q6 b qr _ L
+q6 c q7 _ L
+q6 _ qr _ R
+
+q7 a q8 a L
+q7 b q9 b L
+q7 c q10 c L
+q7 _ qa _ L
+
+q8 a q8 a L
+q8 b q8 b L
+q8 c q8 c L
+q8 _ q11 _ R
+
+q9 a q9 a L
+q9 b q9 b L
+q9 c q9 c L
+q9 _ q12 _ R
+
+q10 a q10 a L
+q10 b q10 b L
+q10 c q10 c L
+q10 _ q13 _ R
+
+q11 a q0 _ R
+q11 b qr _ R
+q11 c qr _ R
+q11 _ qr _ R
+
+q12 a qr _ R
+q12 b q0 _ R
+q12 c qr _ R
+q12 _ qr _ R
+
+q13 a qr _ R
+q13 b qr _ R
+q13 c q0 _ R
+q13 _ qr _ R
