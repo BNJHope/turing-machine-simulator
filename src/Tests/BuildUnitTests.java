@@ -13,12 +13,12 @@ import static org.junit.Assert.assertEquals;
 /**
  * Automated tests class.
  */
-public class TuringMachineTests {
+public class BuildUnitTests {
 
     /**
      * Directory with all of the test materials needed.
      */
-    private static final String testDirectory = "../../TestFiles/";
+    private static final String testDirectory = "TestFiles/BuildUnitTests/";
 
     /**
      * Name of the file that defines where the machine is.

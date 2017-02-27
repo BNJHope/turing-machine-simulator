@@ -35,7 +35,7 @@
         <!-- Create the distribution directory -->
         <mkdir dir="${jar.dir}"/>
 
-        <!-- Put everything in ${classes.dir} into the TuringMachineTests.jar file -->
+        <!-- Put everything in ${classes.dir} into the BuildUnitTests.jar file -->
         <jar jarfile="${jar.dir}/TuringMachine.jar" basedir="${classes.dir}">
             <manifest>
                 <attribute name="Main-Class" value="Main.TuringMachineMain"/>
@@ -54,11 +54,12 @@
             </classpath>
 
             <!--<batchtest fork="yes">-->
-                <!--<fileset dir="${test.src.dir}" includes="*Test.java"/>-->
+                <!--<fileset dir="${test.src.dir}" includes="*Tests.java"/>-->
             <!--</batchtest>-->
 
             <formatter type="plain"/>
-            <test name="Tests.TuringMachineTests" haltonfailure="no" todir="${report.dir}"/>
+            <test name="Tests.BuildUnitTests" haltonfailure="no" todir="${report.dir}"/>
+            <test name="Tests.PalindromeTests" haltonfailure="no" todir="${report.dir}"/>
         </junit>
     </target>
 

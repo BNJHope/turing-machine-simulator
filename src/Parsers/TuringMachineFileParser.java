@@ -214,13 +214,10 @@ public class TuringMachineFileParser {
             // get the next line from the file
             line = fileScanner.nextLine();
 
-            System.out.println("Line : " + line);
-            System.out.println("Line is null : " + (line == null));
             /* If the line is a comment, empty or whitespace then exit the loop, otherwise
             keep searching for a non-comment line. */
             shouldIgnoreLine = !lineIsMeaningful(line);
 
-            System.out.println("Should ignore line : " + shouldIgnoreLine);
         }
 
         return line.split("\\s+");
