@@ -91,8 +91,8 @@ public class TuringMachineFileParser {
         // new state object to return
         State newstate;
 
-        // the index of the element which contains
-        // the label of the state in the collection of elements
+        /* The index of the element which contains
+        the label of the state in the collection of elements */
         final int STATE_LABEL_INDEX = 0;
 
         /* The index of the element which contains the symbol determining
@@ -122,8 +122,8 @@ public class TuringMachineFileParser {
      */
     private ArrayList<String> parseAlphabetLine() {
 
-        // in the list of elemnts from the line, this is the index of
-        // the first member of the tape alphabet in the line
+        /* In the list of elemnts from the line, this is the index of
+        the first member of the tape alphabet in the line */
         final int START_OF_SYMBOLS_INDEX = 2;
 
         // get elements of the next line
@@ -133,7 +133,7 @@ public class TuringMachineFileParser {
         ArrayList<String> alphabetList = new ArrayList();
 
         /* Add all of the elements from the line after the elements
-           that shows the number of symbols in the tape alphabet. */
+        that shows the number of symbols in the tape alphabet. */
         alphabetList.addAll(Arrays.asList(elements).subList(START_OF_SYMBOLS_INDEX, elements.length));
 
         // add the blank character to the tape alphabet
@@ -156,21 +156,21 @@ public class TuringMachineFileParser {
                 OUTPUT_SYMBOL_INDEX = 3,
                 TRANSITION_DIRECTION_INDEX = 4;
 
-        //the parts of the line in the file
+        // the parts of the line in the file
         String lineElements[] = this.getElementsOfNextLine();
 
-        //the collection of data needed for this transition
+        // the collection of data needed for this transition
         TransitionParseObject tpo = new TransitionParseObject();
 
-        // add the start state label to the transition object to return
-        // which is the state the transition starts in
+        /* Add the start state label to the transition object to return
+        which is the state the transition starts in. */
         tpo.startStateLabel = lineElements[START_STATE_SYMBOL_INDEX];
 
         // add the input symbol to the transition object
         tpo.inputSymbol = lineElements[INPUT_SYMBOL_INDEX];
 
-        // create the transition object to return, including the next state object, the output symbol
-        // and the direction where the read/write head will go after it has written the output
+        /* Create the transition object to return, including the next state object, the output symbol
+        and the direction where the read/write head will go after it has written the output. */
         tpo.transition = new Transition(tm.getState(lineElements[NEXT_STATE_LABEL_INDEX]),
                 lineElements[OUTPUT_SYMBOL_INDEX],
                 TapeTransitionDirection.parseTapeTransitionDirection(lineElements[TRANSITION_DIRECTION_INDEX]));

@@ -18,5 +18,5 @@ public enum TuringMachineStateType {
     /**
      * For the reject state in the machine.
      */
-    REJCECT;
+    REJCECT
 }
