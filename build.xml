@@ -22,7 +22,7 @@
     <target name="compile">
 
         <mkdir dir="${classes.dir}"/>
-        <javac includeantruntime="false" debug="true" srcdir="${src.dir}" destdir="${classes.dir}">
+        <javac includeantruntime="false" srcdir="${src.dir}" destdir="${classes.dir}">
             <classpath>
                 <path refid="build.path"/>
             </classpath>
@@ -35,7 +35,7 @@
         <!-- Create the distribution directory -->
         <mkdir dir="${jar.dir}"/>
 
-        <!-- Put everything in ${classes.dir} into the AdaptiveHuffmanCoding.jar file -->
+        <!-- Put everything in ${classes.dir} into the TuringMachineTests.jar file -->
         <jar jarfile="${jar.dir}/TuringMachine.jar" basedir="${classes.dir}">
             <manifest>
                 <attribute name="Main-Class" value="Main.TuringMachineMain"/>
@@ -50,8 +50,12 @@
         <junit printsummary="yes" haltonfailure="no">
             <classpath>
                 <path refid="test.path"/>
-                <pathelement location="${build.dir}"/>
+                <pathelement location="${classes.dir}"/>
             </classpath>
+
+            <!--<batchtest fork="yes">-->
+                <!--<fileset dir="${test.src.dir}" includes="*Test.java"/>-->
+            <!--</batchtest>-->
 
             <formatter type="plain"/>
             <test name="Tests.TuringMachineTests" haltonfailure="no" todir="${report.dir}"/>

@@ -183,15 +183,10 @@ public class TuringMachineFileParser {
      * Set up the file streams.
      * @param filename The file to read.
      */
-    private void setUpFileInput(String filename) {
+    private void setUpFileInput(String filename) throws FileNotFoundException {
 
         // try to create a scanner for the Turing machine creation file
-        try {
-            this.fileScanner = new Scanner(new File(filename));
-        } catch (FileNotFoundException e) {
-            System.err.println("Turing machine creation file not found");
-            System.exit(1);
-        }
+        this.fileScanner = new Scanner(new File(filename));
 
     }
 
