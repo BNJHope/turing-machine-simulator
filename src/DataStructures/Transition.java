@@ -28,14 +28,26 @@ public class Transition {
         this.nextDirection = nextDirection;
     }
 
+    /**
+     * Getter for the next state of the transition.
+     * @return The next state held by the transition.
+     */
     public State getNextState() {
         return nextState;
     }
 
+    /**
+     * Getter for the output symbol of the transition.
+     * @return The output symbol held by the transition.
+     */
     public String getOutputSymbol() {
         return outputSymbol;
     }
 
+    /**
+     * Getter for the next tape direction of the transition.
+     * @return The tape direction held by the transition.
+     */
     public TapeTransitionDirection getNextDirection() {
         return nextDirection;
     }

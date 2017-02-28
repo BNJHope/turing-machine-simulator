@@ -1,5 +1,5 @@
 #Binary Addition
-states 20
+states 21
 
 #start state - filters out # symbol
 q0
@@ -24,6 +24,7 @@ q14
 q15
 q16
 q17
+q18
 qa +
 qr -
 
@@ -79,7 +80,7 @@ q4 _ qr _ R
 # go to this state after we see a 1 and a hash - need to go through used numbers i.e x's
 q5 0 q7 x R
 q5 1 q6 c R
-q5 c q10 x R
+q5 c q9 x R
 q5 # q11 # R
 q5 | qr | R
 q5 x q5 x R
@@ -126,7 +127,7 @@ q8 _ qr _ R
 q9 0 q6 c R
 q9 1 q7 c R
 q9 c qr c R
-q9 # q10 # R
+q9 # q18 # R
 q9 | qr | R
 q9 x qr x R
 q9 _ qr _ R
@@ -203,3 +204,12 @@ q17 # qr # L
 q17 | qa | L
 q17 x qr x L
 q17 _ qr _ L
+
+#q18 : check for a 0 then a 1 to try and accept - carry case
+q18 0 q11 x R
+q18 1 qr x R
+q18 c qr c R
+q18 # qr # R
+q18 | qr | R
+q18 x q18 x R
+q18 _ qr _ R
