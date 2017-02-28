@@ -45,70 +45,70 @@ public class BinaryAdditionTests {
 
     }
 
-//    /**
-//     * Test the Turing machine accepts short acceptable binary additions results of same length.
-//     */
-//    @Test
-//    public void testAcceptShortEven() {
-//
-//        String testFileName = testDirectory + "testShortEvenAccept.txt";
-//        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
-//        assertEquals(TuringMachineReturnCode.ACCEPTED, result);
-//
-//    }
-//
-//    /**
-//     * Test the Turing machine accepts short acceptable binary additions results of differing length.
-//     */
-//    @Test
-//    public void testAcceptShortOdd() {
-//
-//        String testFileName = testDirectory + "testShortOddAccept.txt";
-//        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
-//        assertEquals(TuringMachineReturnCode.ACCEPTED, result);
-//
-//    }
-//
-//    /**
-//     * Test the Turing machine accepts normal length acceptable binary additions results of same length.
-//     */
-//    @Test
-//    public void testAcceptNormalEven() {
-//
-//        System.out.println("\n\nStarting normal even\n\n");
-//        String testFileName = testDirectory + "testNormalEvenAccept.txt";
-//        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
-//        assertEquals(TuringMachineReturnCode.ACCEPTED, result);
-//
-//    }
-//
-//    /**
-//     * Test the Turing machine accepts normal length acceptable binary additions results of differing length.
-//     */
-//    @Test
-//    public void testAcceptNormalOdd() {
-//
-//        System.out.println("\n\nStarting normal odd\n\n");
-//        String testFileName = testDirectory + "testNormalOddAccept.txt";
-//        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
-//        assertEquals(TuringMachineReturnCode.ACCEPTED, result);
-//
-//    }
-//
-//
-//
-//    /**
-//     * Test the Turing machine accepts long length acceptable binary additions results of same length.
-//     */
-//    @Test
-//    public void testAcceptLongEven() {
-//
-//        System.out.println("\n\nStarting normal even\n\n");
-//        String testFileName = testDirectory + "testLongEvenAccept.txt";
-//        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
-//        assertEquals(TuringMachineReturnCode.ACCEPTED, result);
-//        System.out.println("\n\nEnding normal even\n\n");
-//    }
+    /**
+     * Test the Turing machine accepts short acceptable binary additions results of same length.
+     */
+    @Test
+    public void testAcceptShortEven() {
+
+        String testFileName = testDirectory + "testShortEvenAccept.txt";
+        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        assertEquals(TuringMachineReturnCode.ACCEPTED, result);
+
+    }
+
+    /**
+     * Test the Turing machine accepts short acceptable binary additions results of differing length.
+     */
+    @Test
+    public void testAcceptShortOdd() {
+
+        String testFileName = testDirectory + "testShortOddAccept.txt";
+        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        assertEquals(TuringMachineReturnCode.ACCEPTED, result);
+
+    }
+
+    /**
+     * Test the Turing machine accepts normal length acceptable binary additions results of same length.
+     */
+    @Test
+    public void testAcceptNormalEven() {
+
+        System.out.println("\n\nStarting normal even\n\n");
+        String testFileName = testDirectory + "testNormalEvenAccept.txt";
+        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        assertEquals(TuringMachineReturnCode.ACCEPTED, result);
+
+    }
+
+    /**
+     * Test the Turing machine accepts normal length acceptable binary additions results of differing length.
+     */
+    @Test
+    public void testAcceptNormalOdd() {
+
+        System.out.println("\n\nStarting normal odd\n\n");
+        String testFileName = testDirectory + "testNormalOddAccept.txt";
+        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        assertEquals(TuringMachineReturnCode.ACCEPTED, result);
+
+    }
+
+
+
+    /**
+     * Test the Turing machine accepts long length acceptable binary additions results of same length.
+     */
+    @Test
+    public void testAcceptLongEven() {
+
+        System.out.println("\n\nStarting normal even\n\n");
+        String testFileName = testDirectory + "testLongEvenAccept.txt";
+        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        assertEquals(TuringMachineReturnCode.ACCEPTED, result);
+        System.out.println("\n\nEnding normal even\n\n");
+    }
 
     /**
      * Test the Turing machine accepts long length acceptable binary additions results of differing length.
@@ -124,29 +124,29 @@ public class BinaryAdditionTests {
         System.out.println("\n\nEnding normal odd\n\n");
     }
 
-//    /**
-//     * Test the Turing machine deals with carrying correctly when the first number is longer
-//     */
-//    @Test
-//    public void testCarryFirstLonger() {
-//
-//        System.out.println("\n\nStarting carry\n\n");
-//        String testFileName = testDirectory + "testCarryFirstLonger.txt";
-//        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
-//        assertEquals(TuringMachineReturnCode.ACCEPTED, result);
-//        System.out.println("\n\nEnding carry\n\n");
-//    }
-//
-//    /**
-//     * Test the Turing machine deals with carrying correctly when the second number is longer
-//     */
-//    @Test
-//    public void testCarrySecondLonger() {
-//
-//        System.out.println("\n\nStarting carry\n\n");
-//        String testFileName = testDirectory + "testCarrySecondLonger.txt";
-//        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
-//        assertEquals(TuringMachineReturnCode.ACCEPTED, result);
-//        System.out.println("\n\nEnding carry\n\n");
-//    }
+    /**
+     * Test the Turing machine deals with carrying correctly when the first number is longer
+     */
+    @Test
+    public void testCarryFirstLonger() {
+
+        System.out.println("\n\nStarting carry\n\n");
+        String testFileName = testDirectory + "testCarryFirstLonger.txt";
+        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        assertEquals(TuringMachineReturnCode.ACCEPTED, result);
+        System.out.println("\n\nEnding carry\n\n");
+    }
+
+    /**
+     * Test the Turing machine deals with carrying correctly when the second number is longer
+     */
+    @Test
+    public void testCarrySecondLonger() {
+
+        System.out.println("\n\nStarting carry\n\n");
+        String testFileName = testDirectory + "testCarrySecondLonger.txt";
+        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        assertEquals(TuringMachineReturnCode.ACCEPTED, result);
+        System.out.println("\n\nEnding carry\n\n");
+    }
 }

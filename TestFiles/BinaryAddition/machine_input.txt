@@ -127,7 +127,7 @@ q8 _ qr _ R
 q9 0 q6 c R
 q9 1 q7 c R
 q9 c qr c R
-q9 # q18 # R
+q9 # q18 1 R
 q9 | qr | R
 q9 x qr x R
 q9 _ qr _ R
@@ -205,11 +205,11 @@ q17 | qa | L
 q17 x qr x L
 q17 _ qr _ L
 
-#q18 : check for a 0 then a 1 to try and accept - carry case
-q18 0 q11 x R
+#q18 - replace next x with # then try to find 0
+q18 0 qr x R
 q18 1 qr x R
 q18 c qr c R
 q18 # qr # R
 q18 | qr | R
-q18 x q18 x R
+q18 x q10 # R
 q18 _ qr _ R
