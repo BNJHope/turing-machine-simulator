@@ -53,13 +53,126 @@ public class ReverseStringTests {
     @Test
     public void testShortAccept() {
 
-        String testString = "abc", resultStart = new String(new char[testString.length() + 1]).replace('\0', 'x');
-        resultStart = '_' + resultStart.substring(1, resultStart.length());
+        /* The string we are trying to reverse */
+        String testString = "ab";
 
         String testFileName = testDirectory + "testShortAccept.txt";
         TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+
+        // check the code is accepted
         assertEquals(TuringMachineReturnCode.ACCEPTED, result);
-        assertEquals(resultStart + "#" + new StringBuilder(testString).reverse().toString(), tm.getTape());
+
+        /**
+         * Gets a string representation of all characters on the tape and the actual reverse string we want to check,
+         * which is contained in all tape segments after the '#' character.
+         */
+        String tapeResult = tm.getTape(), reverseString = tapeResult.substring(tapeResult.indexOf("#") + 1, tapeResult.length());
+
+        assertEquals(new StringBuilder(testString).reverse().toString(), reverseString);
 
     }
+
+    /**
+     * Test the Turing machine accepts medium strings with a hash tag on the end and generates
+     * reverse string correctly.
+     */
+    @Test
+    public void testMediumAccept() {
+
+        /* The string we are trying to reverse */
+        String testString = "abcabcabc";
+
+        String testFileName = testDirectory + "testMediumAccept.txt";
+        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+
+        // check the code is accepted
+        assertEquals(TuringMachineReturnCode.ACCEPTED, result);
+
+        /**
+         * Gets a string representation of all characters on the tape and the actual reverse string we want to check,
+         * which is contained in all tape segments after the '#' character.
+         */
+        String tapeResult = tm.getTape(), reverseString = tapeResult.substring(tapeResult.indexOf("#") + 1, tapeResult.length());
+
+        assertEquals(new StringBuilder(testString).reverse().toString(), reverseString);
+
+    }
+
+    /**
+     * Test the Turing machine accepts long strings with a hash tag on the end and generates
+     * reverse string correctly.
+     */
+    @Test
+    public void testLongAccept() {
+
+        /* The string we are trying to reverse */
+        String testString = "abcabcabcabcabcabcabcabcabcabcabcacbacbbacbacbabcabbacbacbabbacbacbabcabcbac";
+
+        String testFileName = testDirectory + "testLongAccept.txt";
+        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+
+        // check the code is accepted
+        assertEquals(TuringMachineReturnCode.ACCEPTED, result);
+
+        /**
+         * Gets a string representation of all characters on the tape and the actual reverse string we want to check,
+         * which is contained in all tape segments after the '#' character.
+         */
+        String tapeResult = tm.getTape(), reverseString = tapeResult.substring(tapeResult.indexOf("#") + 1, tapeResult.length());
+
+        assertEquals(new StringBuilder(testString).reverse().toString(), reverseString);
+
+    }
+
+    /**
+     * Test the Turing machine accepts one character strings with a hash tag on the end and generates
+     * reverse string correctly.
+     */
+    @Test
+    public void testOneCharacter() {
+
+        /* The string we are trying to reverse */
+        String testString = "a";
+
+        String testFileName = testDirectory + "testOneCharacter.txt";
+        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+
+        // check the code is accepted
+        assertEquals(TuringMachineReturnCode.ACCEPTED, result);
+
+        /**
+         * Gets a string representation of all characters on the tape and the actual reverse string we want to check,
+         * which is contained in all tape segments after the '#' character.
+         */
+        String tapeResult = tm.getTape(), reverseString = tapeResult.substring(tapeResult.indexOf("#") + 1, tapeResult.length());
+
+        assertEquals(new StringBuilder(testString).reverse().toString(), reverseString);
+
+    }
+
+    /**
+     * Test the Turing machine accepts strings with no characters i.e only a hash tag.
+     */
+    @Test
+    public void testNoCharacter() {
+
+        /* The string we are trying to reverse */
+        String testString = "";
+
+        String testFileName = testDirectory + "testNoCharacter.txt";
+        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+
+        // check the code is accepted
+        assertEquals(TuringMachineReturnCode.ACCEPTED, result);
+
+        /**
+         * Gets a string representation of all characters on the tape and the actual reverse string we want to check,
+         * which is contained in all tape segments after the '#' character.
+         */
+        String tapeResult = tm.getTape(), reverseString = tapeResult.substring(tapeResult.indexOf("#") + 1, tapeResult.length());
+
+        assertEquals(new StringBuilder(testString).reverse().toString(), reverseString);
+
+    }
+
 }
