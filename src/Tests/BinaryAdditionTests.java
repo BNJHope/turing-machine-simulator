@@ -46,7 +46,7 @@ public class BinaryAdditionTests {
     }
 
     /**
-     * Test the Turing machine accepts short acceptable binary additions results of even length.
+     * Test the Turing machine accepts short acceptable binary additions results of same length.
      */
     @Test
     public void testAcceptShortEven() {
@@ -56,5 +56,46 @@ public class BinaryAdditionTests {
         assertEquals(TuringMachineReturnCode.ACCEPTED, result);
 
     }
+
+    /**
+     * Test the Turing machine accepts short acceptable binary additions results of differing length.
+     */
+    @Test
+    public void testAcceptShortOdd() {
+
+        String testFileName = testDirectory + "testShortOddAccept.txt";
+        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        assertEquals(TuringMachineReturnCode.ACCEPTED, result);
+
+    }
+
+    /**
+     * Test the Turing machine accepts normal length acceptable binary additions results of same length.
+     */
+    @Test
+    public void testAcceptNormalEven() {
+
+        System.out.println("\n\nStarting normal even\n\n");
+        String testFileName = testDirectory + "testNormalEvenAccept.txt";
+        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        System.out.println("\n\nEnding normal even\n\n");
+        assertEquals(TuringMachineReturnCode.ACCEPTED, result);
+
+    }
+
+    /**
+     * Test the Turing machine accepts normal length acceptable binary additions results of differing length.
+     */
+    @Test
+    public void testAcceptNormalOdd() {
+
+        System.out.println("\n\nStarting normal odd\n\n");
+        String testFileName = testDirectory + "testNormalOddAccept.txt";
+        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        System.out.println("\n\nEnding normal odd\n\n");
+        assertEquals(TuringMachineReturnCode.ACCEPTED, result);
+
+    }
+
 
 }

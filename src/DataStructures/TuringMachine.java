@@ -82,7 +82,7 @@ public class TuringMachine {
             // the transition that will be made from the state with the given input symbol.
             Transition transitionToMake = currentState.makeTransition(tapeSymbol);
 
-            System.out.println("State transition : " + this.currentState.getLabel() + " -> " + tapeSymbol + " -> " + transitionToMake.getNextState().getLabel());
+            System.out.println("State transition : " + this.currentState.getLabel() + " -> " + tapeSymbol + " -> " + transitionToMake.getNextState().getLabel() + ", " + transitionToMake.getOutputSymbol() + ", " + transitionToMake.getNextDirection());
 
             // set the current state to the state that we go to in the transition.
             this.currentState = transitionToMake.getNextState();

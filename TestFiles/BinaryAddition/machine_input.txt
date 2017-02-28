@@ -42,7 +42,7 @@ q0 _ qr _ R
 q1 0 q2 | R
 q1 1 q3 | R
 q1 c qr c R
-q1 # q2 # R
+q1 # q4 # R
 q1 | q1 | R
 q1 x qa x R
 q1 _ qr _ R
@@ -71,7 +71,7 @@ q3 _ qr _ R
 q4 0 q6 x R
 q4 1 q7 x R
 q4 c q8 x R
-q4 # q6 # R
+q4 # q10 # R
 q4 | qr | R
 q4 x q4 x R
 q4 _ qr _ R
@@ -80,7 +80,7 @@ q4 _ qr _ R
 q5 0 q7 x R
 q5 1 q6 c R
 q5 c q10 x R
-q5 # q7 # R
+q5 # q11 # R
 q5 | qr | R
 q5 x q5 x R
 q5 _ qr _ R
@@ -117,7 +117,7 @@ q7 _ qr _ R
 q8 0 q7 x R
 q8 1 q6 c R
 q8 c qr c R
-q8 # qr # R
+q8 # q11 # R
 q8 | qr | R
 q8 x qr x R
 q8 _ qr _ R
@@ -126,19 +126,19 @@ q8 _ qr _ R
 q9 0 q6 c R
 q9 1 q7 c R
 q9 c qr c R
-q9 # qr # R
+q9 # q10 # R
 q9 | qr | R
 q9 x qr x R
 q9 _ qr _ R
 
 #q10 : keep going along numbers waiting for 0 to try and accept
-q10 0 q12 c R
-q10 1 qr c R
+q10 0 q12 x R
+q10 1 qr x R
 q10 c qr c R
 q10 # qr # R
 q10 | qr | R
 q10 x q10 x R
-q10 _ qr _ R
+q10 _ q12 _ R
 
 #q11 : keep going along numbers waiting for 1 to try and accept
 q11 0 qr x R
@@ -175,7 +175,7 @@ q14 c q13 c L
 q14 # q15 # L
 q14 | qr | R
 q14 x q14 x L
-q14 _ qr _ L
+q14 _ q14 _ L
 
 #q15 : check left is x
 q15 0 q13 0 L
