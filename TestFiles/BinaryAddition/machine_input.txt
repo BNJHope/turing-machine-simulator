@@ -18,8 +18,8 @@ q8
 q9
 q10
 q11
-qa
-qr
+qa +
+qr -
 
 alphabet 6 0 1 # | x c
 
@@ -67,24 +67,50 @@ q4 x q4 x R
 
 # go to this state after we see a 1 and a hash - need to go through used numbers i.e x's
 q5 0 q7 x R
-q5 1 q9 c R
+q5 1 q6 c R
 q5 c q10 x R
 q5 # q7 # R
 q5 | qr | R
 q5 x q5 x R
 
-# q6 : 0 + 0
-q6 0 q7 x R
-q6 1 q9 c R
-q6 c q10 x R
-q6 # q7 # R
+# q6 : result number should be 0 - wait for next number
+# i.e 0 + 0
+# or 1 + 1
+# or 0 + c + 1
+# or 1 + c + 0
+
+q6 0 q6 0 R
+q6 1 q6 1 R
+q6 c qr c R
+q6 # q10 # R
 q6 | qr | R
-q6 x q6 x R
+q6 x qr x R
 
-# q7 : 0 + 1 or 1 + 0
+# q7 : result number should be 1 - wait for next number
+# i.e 0 + 1
+# or 1 + 0
+# or 0 + c + 0
+# or 1 + c + 1
 
-# q8 : 0 + c
+q7 0 q7 0 R
+q7 1 q7 1 R
+q7 c qr c R
+q7 # q11 # R
+q7 | qr | R
+q7 x qr x R
 
-# q9 : 1 + 1
+# q8 : 0 + c decision
+q8 0 q7 x R
+q8 1 q6 c R
+q8 c qr c R
+q8 # qr # R
+q8 | qr | R
+q8 x qr x R
 
-# q10 : 1 + c
+# q9 : 1 + c decision
+q9 0 q6 c R
+q9 1 q7 c R
+q9 c qr c R
+q9 # qr # R
+q9 | qr | R
+q9 x qr x R

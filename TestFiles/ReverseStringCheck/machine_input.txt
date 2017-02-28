@@ -1,0 +1,51 @@
+# Write a string after the # that is reverse of first string
+
+alphabet 6 a b c x # _
+
+# initial search for hashtag or end whitespace for end of string - move to q1 once we find it
+q0 a q0 a R
+q0 b q0 b R
+q0 c q0 c R
+q0 x qr x R
+q0 # q1 # L
+q0 _ q1 # R
+
+# determines which letter to write to afterwards
+q1 a q2 x R
+q1 b q3 x R
+q1 c q4 x R
+q1 x q1 x R
+q0 # qr # R
+q0 _ qa _ R
+
+# need to write a - ignore until we get to whitespace
+q2 a q2 a R
+q2 b q2 b R
+q2 c q2 c R
+q2 x q2 x R
+q2 # q2 # R
+q2 _ q5 a L
+
+# need to write b - ignore until we get to whitespace
+q3 a q3 a R
+q3 b q3 b R
+q3 c q3 c R
+q3 x q3 x R
+q3 # q3 # R
+q3 _ q5 b L
+
+# need to write c - ignore until we get to whitespace
+q4 a q4 a R
+q4 b q4 b R
+q4 c q4 c R
+q4 x q4 x R
+q4 # q4 # R
+q4 _ q5 c L
+
+# move left until we reach hashtag
+q5 a q5 a L
+q5 b q5 b L
+q5 c q5 c L
+q5 x qr x L
+q5 # q1 # L
+q5 _ q5 _ R

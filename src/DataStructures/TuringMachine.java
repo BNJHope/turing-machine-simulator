@@ -269,4 +269,36 @@ public class TuringMachine {
         return this.states.get(label);
     }
 
+    /**
+     * Gets the string representation of the symbols of the tape of this machine.
+     * @return The symbols of the tape in string form.
+     */
+    public String getTape() {
+
+        /* Get the current tape segment to work from and use it as the segment to work from. */
+        TapeSegment currentSeg = this.currentTapeSegment;
+
+        /* Result string i.e all of the symbols on the tape. */
+        String result = new String(currentSeg.getSymbol());
+
+        /* while there are still segments to the right of the current segment,
+        add the symbol on the tape segment on the right to the tape. */
+        while(currentSeg != null) {
+            currentSeg = currentSeg.getRightSegment();
+            if(currentSeg != null) result += currentSeg.getSymbol();
+        }
+
+        /* Reset the reference of the current segment to the start of where we
+        worked from. */
+        currentSeg = this.currentTapeSegment;
+
+        /* while there are still segments to the left of the current segment,
+        add the symbol on the tape segment on the left to the tape. */
+        while(currentSeg != null) {
+            currentSeg = currentSeg.getLeftSegment();
+            if(currentSeg != null) result = currentSeg.getSymbol() + result;
+        }
+
+        return result;
+    }
 }
