@@ -7,9 +7,9 @@ q0
 # recurring state
 q1
 
-
 q2
 q3
+
 q4
 q5
 q6
@@ -18,4 +18,73 @@ q8
 q9
 q10
 q11
-q
+qa
+qr
+
+alphabet 6 0 1 # | x c
+
+#initial state
+q0 0 q2 | R
+q0 1 q3 | R
+q0 c qr c R
+q0 # qr # R
+q0 | qr | R
+q0 x qr | R
+
+#usual return state at beginning of machine
+q1 0 q2 | R
+q1 1 q3 | R
+q1 c qr c R
+q1 # q2 # R
+q1 | q1 | R
+q1 x qa x R
+
+# state we go to after we see a 0
+# wait for #
+q2 0 q2 0 R
+q2 1 q2 1 R
+q2 c qr c R
+q2 # q4 # R
+q2 | qr | R
+q2 x qr x R
+
+# state we go to after we see a 1
+# wait for #
+q3 0 q3 0 R
+q3 1 q3 1 R
+q3 c qr c R
+q3 # q5 # R
+q3 | qr | R
+q3 x qr x R
+
+# go to this state after we see a 0 and a hash - need to go through used numbers i.e x's
+q4 0 q6 x R
+q4 1 q7 x R
+q4 c q8 x R
+q4 # q6 # R
+q4 | qr | R
+q4 x q4 x R
+
+# go to this state after we see a 1 and a hash - need to go through used numbers i.e x's
+q5 0 q7 x R
+q5 1 q9 c R
+q5 c q10 x R
+q5 # q7 # R
+q5 | qr | R
+q5 x q5 x R
+
+# q6 : 0 + 0
+q6 0 q7 x R
+q6 1 q9 c R
+q6 c q10 x R
+q6 # q7 # R
+q6 | qr | R
+q6 x q6 x R
+
+# q7 : 0 + 1 or 1 + 0
+
+# q8 : 0 + c
+
+# q9 : 1 + 1
+
+# q10 : 1 + c
