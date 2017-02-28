@@ -60,6 +60,7 @@
             <formatter type="plain"/>
             <test name="Tests.BuildUnitTests" haltonfailure="no" todir="${report.dir}"/>
             <test name="Tests.PalindromeTests" haltonfailure="no" todir="${report.dir}"/>
+            <test name="Tests.ReverseStringTests" haltonfailure="no" todir="${report.dir}"/>
         </junit>
     </target>
 
