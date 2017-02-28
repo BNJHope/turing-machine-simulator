@@ -10,7 +10,7 @@ qa +
 qr -
 alphabet 5 a b c x #
 
-# initial search for hashtag or end whitespace for end of string - move to q1 once we find it
+# initial search for hash tag or end whitespace for end of string - move to q1 once we find it
 q0 a q0 a R
 q0 b q0 b R
 q0 c q0 c R

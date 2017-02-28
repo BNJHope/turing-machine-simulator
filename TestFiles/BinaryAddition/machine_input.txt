@@ -30,6 +30,7 @@ q0 c qr c R
 q0 # qr # R
 q0 | qr | R
 q0 x qr | R
+q0 _ qr _ R
 
 #usual return state at beginning of machine
 q1 0 q2 | R
@@ -38,6 +39,7 @@ q1 c qr c R
 q1 # q2 # R
 q1 | q1 | R
 q1 x qa x R
+q1 _ qr _ R
 
 # state we go to after we see a 0
 # wait for #
@@ -47,6 +49,7 @@ q2 c qr c R
 q2 # q4 # R
 q2 | qr | R
 q2 x qr x R
+q2 _ qr _ R
 
 # state we go to after we see a 1
 # wait for #
@@ -56,6 +59,7 @@ q3 c qr c R
 q3 # q5 # R
 q3 | qr | R
 q3 x qr x R
+q3 _ qr _ R
 
 # go to this state after we see a 0 and a hash - need to go through used numbers i.e x's
 q4 0 q6 x R
@@ -64,6 +68,7 @@ q4 c q8 x R
 q4 # q6 # R
 q4 | qr | R
 q4 x q4 x R
+q4 _ qr _ R
 
 # go to this state after we see a 1 and a hash - need to go through used numbers i.e x's
 q5 0 q7 x R
@@ -72,6 +77,7 @@ q5 c q10 x R
 q5 # q7 # R
 q5 | qr | R
 q5 x q5 x R
+q5 _ qr _ R
 
 # q6 : result number should be 0 - wait for next number
 # i.e 0 + 0
@@ -85,6 +91,7 @@ q6 c qr c R
 q6 # q10 # R
 q6 | qr | R
 q6 x qr x R
+q6 _ qr _ R
 
 # q7 : result number should be 1 - wait for next number
 # i.e 0 + 1
@@ -98,6 +105,7 @@ q7 c qr c R
 q7 # q11 # R
 q7 | qr | R
 q7 x qr x R
+q7 _ qr _ R
 
 # q8 : 0 + c decision
 q8 0 q7 x R
@@ -106,6 +114,7 @@ q8 c qr c R
 q8 # qr # R
 q8 | qr | R
 q8 x qr x R
+q8 _ qr _ R
 
 # q9 : 1 + c decision
 q9 0 q6 c R
@@ -114,3 +123,77 @@ q9 c qr c R
 q9 # qr # R
 q9 | qr | R
 q9 x qr x R
+q9 _ qr _ R
+
+#q10 : keep going along numbers waiting for 0 to try and accept
+q10 0 q12 c R
+q10 1 qr c R
+q10 c qr c R
+q10 # qr # R
+q10 | qr | R
+q10 x q10 x R
+q10 _ qr _ R
+
+#q11 : keep going along numbers waiting for 1 to try and accept
+q11 0 qr c R
+q11 1 q12 c R
+q11 c qr c R
+q11 # qr # R
+q11 | qr | R
+q11 x q11 x R
+q11 _ qr _ R
+
+# q12 : check if there are still numbers to add or not - go back and check
+# if there are numbers to add or not if we get to the end
+q12 0 q12 0 R
+q12 1 q13 1 L
+q12 c qr c R
+q12 # qr # R
+q12 | qr | R
+q12 x qr x R
+q12 _ q14 _ L
+
+# q13 : move backwards to restart
+q13 0 q13 0 L
+q13 1 q13 1 L
+q13 c q13 c L
+q13 # q13 # L
+q13 | q1 | R
+q13 x q13 x L
+q13 _ qr _ L
+
+# q14 : move backwards and check for hashtag
+q14 0 q13 0 L
+q14 1 q13 1 L
+q14 c q13 c L
+q14 # q15 # L
+q14 | qr | R
+q14 x q14 x L
+q14 _ qr _ L
+
+#q15 : check left is x
+q15 0 q13 0 L
+q15 1 q13 1 L
+q15 c q13 c L
+q15 # qr # L
+q15 | qr | L
+q15 x q16 x L
+q15 _ qr _ L
+
+#q16 : keep checking for hashtag
+q16 0 q13 0 L
+q16 1 q13 1 L
+q16 c q13 c L
+q16 # q17 # L
+q16 | qr | R
+q16 x q16 x L
+q16 _ qr _ L
+
+#q17 : check hashtag is followed on left by | - then accept if so
+q17 0 q13 0 L
+q17 1 q13 1 L
+q17 c qr c L
+q17 # qr # L
+q17 | qa | L
+q17 x qr x L
+q17 _ qr _ L
