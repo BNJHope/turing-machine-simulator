@@ -3,7 +3,7 @@ package DataStructures;
 import Enums.TapeTransitionDirection;
 
 /**
- * Data structure representing a transition.
+ * Output data from a transition function.
  */
 public class Transition {
 

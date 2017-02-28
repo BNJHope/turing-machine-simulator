@@ -21,6 +21,15 @@ public class TuringMachineMain {
         of the file that gives the input for the machine is located. */
         final int INPUT_FINAL_NAME_INDEX = 1;
 
+        /* Index for where the print flag is. */
+        final int PRINT_TAPE_FLAG_INDEX = 2;
+
+        if(args.length < 2) {
+            System.err.println("2 arguments needed - machine file and input file");
+        }
+
+        System.out.println("");
+        System.out.println("Creating Turing machine...");
         /*
         The parser to create the Turing machine from the machine file.
          */
@@ -38,11 +47,20 @@ public class TuringMachineMain {
             System.exit(1);
         }
 
+        System.out.println("Turing machine created!\nChecking input...");
+
         /*
         Handle the result from the Turing machine processing the input.
          */
         handleOutput(tm.checkIfInputIsAccepted(args[INPUT_FINAL_NAME_INDEX]));
 
+        if(args.length > 2) {
+            if (args[PRINT_TAPE_FLAG_INDEX].equals("-v")) {
+                System.out.println("\nFinal Tape :\n" + tm.getTape());
+            }
+        }
+
+        System.out.println();
     }
 
     /**

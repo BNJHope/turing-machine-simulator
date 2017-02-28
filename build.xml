@@ -1,4 +1,4 @@
-<project name="TuringMachineParser" basedir=".">
+<project name="TuringMachine" default="junit" basedir=".">
 
     <!-- set global properties for this build -->
     <property name="src.dir" value="src"/>

@@ -1,0 +1,6 @@
+if [ "$#" -eq 2 ]; then
+java -jar build/jar/TuringMachine.jar $1 $2
+fi
+if [ "$#" -eq 3 ]; then
+java -jar build/jar/TuringMachine.jar $1 $2 -v
+fi

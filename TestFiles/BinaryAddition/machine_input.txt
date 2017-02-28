@@ -7,23 +7,70 @@ q0
 # recurring state
 q1
 
+# if we start with a 0, we go to this state waiting for a hashtag
 q2
+
+# if we start with a 1, we go to this state waiting for a hashtag
 q3
 
+# after we see the first hashtag and a 0, we go to this state to look for the next number.
 q4
+
+# after we see the first hashtag and a 1, we go to this state to look for the next number.
 q5
+
+# if the addition combination we have ends in a 0, no matter the length (eg. 1 + 1) we wait
+# in this state to see the last hashtag
 q6
+
+# if the addition combination we have ends in a 1, no matter the length (eg. 1 + c + 1) we wait
+# in this state to see the last hashtag
 q7
+
+# if the first number is a 0 and we see a 'c' character in the second number, we end up in this state
+# where we make a decision on the next state to go to based on whether the number after the 'c' is a 1 or 0
 q8
+
+# if the first number is a 1 and we see a 'c' character in the second number, we end up in this state
+# where we make a decision on the next state to go to based on whether the number after the 'c' is a 1 or 0
 q9
+
+# after we see the second hashtag, we wait in this state to find a 0 in the result number as this is the
+# result from the 2 numbers we added. If we find a 1, this state takes us to the reject state.
 q10
+
+# after we see the second hashtag, we wait in this state to find a 1 in the result number as this is the
+# result from the 2 numbers we added. If we find a 0, this state takes us to the reject state.
 q11
+
+# while in this state, we move right along the tape until we reach either a blank character or a 1 to tell us
+# if we need to keep the addition process going.
 q12
+
+# while in this state, we ignore all characters while moving left apart from the '|' character to tell us
+# to start the addition again.
 q13
+
+# go to this state after we have seen blank character at end of result - moves left til we find the hashtag
+# separating result and second number.
 q14
+
+# this state checks if there are any more numbers in the second number to add after the hashtag. If there are,
+# then we just restart the addition. If there are not, we go to q16 to check the first number for any more numbers
+# to add
 q15
+
+# similar to q14, but for getting to the hashtag between the second number and the first number.
 q16
+
+# after we find the hashtag with q16, in this state we check whether there are any more numbers in
+# the first number. If there are not, then we accept the string. If there are, then we restart the addition.
 q17
+
+# Special carry state - if we come across a 'c' before the hashtag in the second number and the first number is a 1,
+# then we need to convert the hashtag between the second number and the result into a 1 so that it can be added in the
+# next addition - this is dealt with my the previous state. This state converts the first 'x' in the partially solved
+# result number into a hashtag so that it can still be used as a delimiter between numbers.
 q18
 qa +
 qr -
@@ -91,7 +138,6 @@ q5 _ qr _ R
 # or 1 + 1
 # or 0 + c + 1
 # or 1 + c + 0
-
 q6 0 q6 0 R
 q6 1 q6 1 R
 q6 c qr c R
@@ -105,7 +151,6 @@ q6 _ qr _ R
 # or 1 + 0
 # or 0 + c + 0
 # or 1 + c + 1
-
 q7 0 q7 0 R
 q7 1 q7 1 R
 q7 c qr c R
@@ -169,7 +214,7 @@ q13 | q1 | R
 q13 x q13 x L
 q13 _ qr _ L
 
-# q14 : move backwards and check for hashtag
+# q14 : check for accept, since we have seen initial blank in q12 - move backwards and check for hashtag
 q14 0 q13 0 L
 q14 1 q13 1 L
 q14 c q13 c L

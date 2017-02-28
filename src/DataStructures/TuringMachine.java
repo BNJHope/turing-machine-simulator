@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * A Turing Machine simulation.
+ * A model of a Turing machine.
  */
 public class TuringMachine {
 
@@ -81,8 +81,6 @@ public class TuringMachine {
 
             // the transition that will be made from the state with the given input symbol.
             Transition transitionToMake = currentState.makeTransition(tapeSymbol);
-
-            System.out.println("State transition : " + this.currentState.getLabel() + " -> " + tapeSymbol + " -> " + transitionToMake.getNextState().getLabel() + ", " + transitionToMake.getOutputSymbol() + ", " + transitionToMake.getNextDirection());
 
             // set the current state to the state that we go to in the transition.
             this.currentState = transitionToMake.getNextState();
@@ -178,7 +176,7 @@ public class TuringMachine {
         try {
             inputFileStream = new FileInputStream(new File(filename));
         } catch (FileNotFoundException e) {
-            System.err.println("Input file not found");
+            System.err.println("Input file not found : " + filename);
             return false;
         }
 

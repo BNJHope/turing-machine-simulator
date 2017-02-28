@@ -4,7 +4,7 @@ import java.util.HashMap;
 import Enums.TuringMachineStateType;
 
 /**
- * DataStructures.State in a Turing Machine
+ * A state in a Turing Machine
  */
 public class State {
 

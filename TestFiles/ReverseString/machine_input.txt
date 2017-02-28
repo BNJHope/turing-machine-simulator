@@ -18,7 +18,8 @@ q0 x qr x R
 q0 # q1 # L
 q0 _ q1 # R
 
-# determines which letter to write to afterwards
+# determines which letter to write into the blank space after the hash afterwards by
+# moving back from the hash until we reach a non-crossed off symbol to copy
 q1 a q2 x R
 q1 b q3 x R
 q1 c q4 x R
