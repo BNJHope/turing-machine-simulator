@@ -62,6 +62,7 @@
             <test name="Tests.PalindromeTests" haltonfailure="no" todir="${report.dir}"/>
             <test name="Tests.ReverseStringTests" haltonfailure="no" todir="${report.dir}"/>
             <test name="Tests.BinaryAdditionTests" haltonfailure="no" todir="${report.dir}"/>
+            <test name="Tests.SortTests" haltonfailure="no" todir="${report.dir}"/>
         </junit>
     </target>
 
