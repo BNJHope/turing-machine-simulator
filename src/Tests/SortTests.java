@@ -54,7 +54,7 @@ public class SortTests {
 
         String testString = "abc";
         String testFileName = testDirectory + "shortSort.txt";
-        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        TuringMachineReturnCode result = tm.checkIfFileIsAccepted(testFileName);
         String expected = "_" + testString + "_", actual = tm.getTape();
         assertEquals(TuringMachineReturnCode.ACCEPTED, result);
         assertEquals(expected, actual);
@@ -69,7 +69,7 @@ public class SortTests {
 
         String testString = "aaaaabbbbbccccc";
         String testFileName = testDirectory + "mediumSort.txt";
-        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        TuringMachineReturnCode result = tm.checkIfFileIsAccepted(testFileName);
         String expected = "_" + testString + "_", actual = tm.getTape();
         assertEquals(TuringMachineReturnCode.ACCEPTED, result);
         assertEquals(expected, actual);
@@ -84,7 +84,7 @@ public class SortTests {
 
         String testString = "aaaaaaaaaabbbbbbbbbbcccccccccc";
         String testFileName = testDirectory + "longSort.txt";
-        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        TuringMachineReturnCode result = tm.checkIfFileIsAccepted(testFileName);
         String expected = "_" + testString + "_", actual = tm.getTape();
         assertEquals(TuringMachineReturnCode.ACCEPTED, result);
         assertEquals(expected, actual);

@@ -46,12 +46,53 @@ public class TuringMachine {
     }
 
     /**
-     * Determines if this Turing machine accepts the given input.
+     * Determines if this Turing machine accepts the given string.
+     * @param stringToCheck The string to examine.
+     * @return The result from running the input through the machine.
+     */
+    public TuringMachineReturnCode checkIfStringIsAccepted(String stringToCheck) {
+
+        /* Create the tape for the machine from the input string.
+        If the method returns false then there was an error in
+        reading the tape and we need to exit. */
+        if (!this.createTapeFromString(stringToCheck))
+            System.exit(1);
+
+        /*
+         * Now that the tape has been read, start the machine and return the code
+         * from it.
+         */
+        return this.startMachine();
+
+    }
+
+    /**
+     * Determines if this Turing machine accepts the given input file.
      *
      * @param inputFileName The input file to examine.
      * @return The result from running the input through the machine.
      */
-    public TuringMachineReturnCode checkIfInputIsAccepted(String inputFileName) {
+    public TuringMachineReturnCode checkIfFileIsAccepted(String inputFileName) {
+
+        /* Create the tape for the machine from the file.
+        If the method returns false then there was an error in
+        reading the tape and we need to exit. */
+        if (!this.createTapeFromFile(inputFileName))
+            System.exit(1);
+
+        /*
+         * Now that the tape has been read, start the machine and return the code
+         * from it.
+         */
+        return this.startMachine();
+
+    }
+
+    /**
+     * Starts the machine after the tape has been formed.
+     * @return The Turing machine result code from processing the tape.
+     */
+    public TuringMachineReturnCode startMachine() {
 
         /* The previous direction - needed in case we need to make new
         tape segments. */
@@ -60,12 +101,6 @@ public class TuringMachine {
         /* The previous tape segment - needed if we need to make new
         tape segments. */
         TapeSegment previousTapeSegment = null;
-
-        /* Create the tape for the machine from the file.
-        If the method returns false then there was an error in
-        reading the tape and we need to exit. */
-        if (!this.createTapeFromFile(inputFileName))
-            System.exit(1);
 
         // Get the start state from the collection of states.
         this.currentState = this.states.get(START_LABEL);
@@ -136,12 +171,64 @@ public class TuringMachine {
                     return TuringMachineReturnCode.UNEXPECTED_TERMINATION;
             }
 
-        // if it did not end on a terminating state
+            // if it did not end on a terminating state
         } else {
             return TuringMachineReturnCode.UNEXPECTED_TERMINATION;
         }
 
+    }
 
+    /**
+     * Construct the tape from the string.
+     * @param input The string to construct the tape from.
+     * @return True if tape was made successfully, false if not.
+     */
+    public boolean createTapeFromString(String input) {
+
+        // the previous tape segment that was read.
+        TapeSegment previousTapeSegment = null, nextTapeSegment;
+
+        /* determines whether the first segment has been read yet
+         or not from the file, since the first segment needs to be stored. */
+        boolean firstSegmentRead = false;
+
+        /*
+         * Create a tape segment for every symbol in the input.
+         */
+        for(char symbol : input.toCharArray()) {
+
+            if (this.alphabet.contains(Character.toString(symbol))) {
+
+                /* Make a new tape statement, using the input read from the string
+                   as the symbol on the tape and the previous tape segment as the tape segment
+                   to the left of this tape segment. */
+                nextTapeSegment = new TapeSegment(Character.toString(symbol), previousTapeSegment);
+
+                /* If there has been a previous tape segment then
+                set the tape segment to the right of the previous tape segment
+                as the new tape segment that was created. */
+                if(previousTapeSegment != null) previousTapeSegment.setRight(nextTapeSegment);
+
+                /* Update the previous tape segment value, ready for the next tape segment
+                   to use as its tape segment piece to the left. */
+                previousTapeSegment = nextTapeSegment;
+
+                /* If this is the first segment, then set the Turing machine's
+                    next tape segment to read as the first segment. */
+                if (!firstSegmentRead) {
+                    firstSegmentRead = true;
+                    this.currentTapeSegment = nextTapeSegment;
+                }
+
+            /* If the character that we read is not in the tape alphabet
+               then return an error. */
+            } else {
+                System.err.println("Character " + input + " not in tape alphabet.");
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**

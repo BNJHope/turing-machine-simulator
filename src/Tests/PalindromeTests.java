@@ -53,7 +53,7 @@ public class PalindromeTests {
     public void testAcceptLongEven() {
 
         String testFileName = testDirectory + "testAcceptLongEven.txt";
-        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        TuringMachineReturnCode result = tm.checkIfFileIsAccepted(testFileName);
         assertEquals(TuringMachineReturnCode.ACCEPTED, result);
 
     }
@@ -65,7 +65,7 @@ public class PalindromeTests {
     public void testAcceptLongOdd() {
 
         String testFileName = testDirectory + "testAcceptLongOdd.txt";
-        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        TuringMachineReturnCode result = tm.checkIfFileIsAccepted(testFileName);
         assertEquals(TuringMachineReturnCode.ACCEPTED, result);
 
     }
@@ -77,7 +77,7 @@ public class PalindromeTests {
     public void testAcceptNormalEven() {
 
         String testFileName = testDirectory + "testAcceptNormalEven.txt";
-        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        TuringMachineReturnCode result = tm.checkIfFileIsAccepted(testFileName);
         assertEquals(TuringMachineReturnCode.ACCEPTED, result);
 
     }
@@ -89,7 +89,7 @@ public class PalindromeTests {
     public void testAcceptNormalOdd() {
 
         String testFileName = testDirectory + "testAcceptNormalOdd.txt";
-        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        TuringMachineReturnCode result = tm.checkIfFileIsAccepted(testFileName);
         assertEquals(TuringMachineReturnCode.ACCEPTED, result);
 
     }
@@ -101,7 +101,7 @@ public class PalindromeTests {
     public void testAcceptShortEven() {
 
         String testFileName = testDirectory + "testAcceptShortEven.txt";
-        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        TuringMachineReturnCode result = tm.checkIfFileIsAccepted(testFileName);
         assertEquals(TuringMachineReturnCode.ACCEPTED, result);
 
     }
@@ -113,7 +113,7 @@ public class PalindromeTests {
     public void testAcceptShortOdd() {
 
         String testFileName = testDirectory + "testAcceptShortOdd.txt";
-        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        TuringMachineReturnCode result = tm.checkIfFileIsAccepted(testFileName);
         assertEquals(TuringMachineReturnCode.ACCEPTED, result);
 
     }
@@ -125,7 +125,7 @@ public class PalindromeTests {
     public void testRejectLongEven() {
 
         String testFileName = testDirectory + "testRejectLongEven.txt";
-        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        TuringMachineReturnCode result = tm.checkIfFileIsAccepted(testFileName);
         assertEquals(TuringMachineReturnCode.REJECTED, result);
 
     }
@@ -137,7 +137,7 @@ public class PalindromeTests {
     public void testRejectLongOdd() {
 
         String testFileName = testDirectory + "testRejectLongOdd.txt";
-        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        TuringMachineReturnCode result = tm.checkIfFileIsAccepted(testFileName);
         assertEquals(TuringMachineReturnCode.REJECTED, result);
 
     }
@@ -149,7 +149,7 @@ public class PalindromeTests {
     public void testRejectNormalEven() {
 
         String testFileName = testDirectory + "testRejectNormalEven.txt";
-        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        TuringMachineReturnCode result = tm.checkIfFileIsAccepted(testFileName);
         assertEquals(TuringMachineReturnCode.REJECTED, result);
 
     }
@@ -161,7 +161,7 @@ public class PalindromeTests {
     public void testRejectNormalOdd() {
 
         String testFileName = testDirectory + "testRejectNormalOdd.txt";
-        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        TuringMachineReturnCode result = tm.checkIfFileIsAccepted(testFileName);
         assertEquals(TuringMachineReturnCode.REJECTED, result);
 
     }
@@ -173,7 +173,7 @@ public class PalindromeTests {
     public void testRejectShortEven() {
 
         String testFileName = testDirectory + "testRejectShortEven.txt";
-        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        TuringMachineReturnCode result = tm.checkIfFileIsAccepted(testFileName);
         assertEquals(TuringMachineReturnCode.REJECTED, result);
 
     }
@@ -185,7 +185,7 @@ public class PalindromeTests {
     public void testRejectShortOdd() {
 
         String testFileName = testDirectory + "testRejectShortOdd.txt";
-        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        TuringMachineReturnCode result = tm.checkIfFileIsAccepted(testFileName);
         assertEquals(TuringMachineReturnCode.REJECTED, result);
 
     }
@@ -197,7 +197,7 @@ public class PalindromeTests {
     public void testEmpty() {
 
         String testFileName = testDirectory + "testEmpty.txt";
-        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        TuringMachineReturnCode result = tm.checkIfFileIsAccepted(testFileName);
         assertEquals(TuringMachineReturnCode.ACCEPTED, result);
 
     }
@@ -209,7 +209,7 @@ public class PalindromeTests {
     public void testSingleCharacter() {
 
         String testFileName = testDirectory + "testSingleCharacter.txt";
-        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        TuringMachineReturnCode result = tm.checkIfFileIsAccepted(testFileName);
         assertEquals(TuringMachineReturnCode.ACCEPTED, result);
 
     }

@@ -52,7 +52,7 @@ public class BinaryAdditionTests {
     public void testAcceptShortEven() {
 
         String testFileName = testDirectory + "testShortEvenAccept.txt";
-        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        TuringMachineReturnCode result = tm.checkIfFileIsAccepted(testFileName);
         assertEquals(TuringMachineReturnCode.ACCEPTED, result);
 
     }
@@ -64,7 +64,7 @@ public class BinaryAdditionTests {
     public void testAcceptShortOdd() {
 
         String testFileName = testDirectory + "testShortOddAccept.txt";
-        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        TuringMachineReturnCode result = tm.checkIfFileIsAccepted(testFileName);
         assertEquals(TuringMachineReturnCode.ACCEPTED, result);
 
     }
@@ -76,7 +76,7 @@ public class BinaryAdditionTests {
     public void testAcceptNormalEven() {
 
         String testFileName = testDirectory + "testNormalEvenAccept.txt";
-        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        TuringMachineReturnCode result = tm.checkIfFileIsAccepted(testFileName);
         assertEquals(TuringMachineReturnCode.ACCEPTED, result);
 
     }
@@ -88,7 +88,7 @@ public class BinaryAdditionTests {
     public void testAcceptNormalOdd() {
 
         String testFileName = testDirectory + "testNormalOddAccept.txt";
-        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        TuringMachineReturnCode result = tm.checkIfFileIsAccepted(testFileName);
         assertEquals(TuringMachineReturnCode.ACCEPTED, result);
 
     }
@@ -102,7 +102,7 @@ public class BinaryAdditionTests {
     public void testAcceptLongEven() {
 
         String testFileName = testDirectory + "testLongEvenAccept.txt";
-        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        TuringMachineReturnCode result = tm.checkIfFileIsAccepted(testFileName);
         assertEquals(TuringMachineReturnCode.ACCEPTED, result);
 
     }
@@ -114,7 +114,7 @@ public class BinaryAdditionTests {
     public void testAcceptLongOdd() {
 
         String testFileName = testDirectory + "testLongOddAccept.txt";
-        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        TuringMachineReturnCode result = tm.checkIfFileIsAccepted(testFileName);
         assertEquals(TuringMachineReturnCode.ACCEPTED, result);
 
     }
@@ -126,7 +126,7 @@ public class BinaryAdditionTests {
     public void testCarryFirstLonger() {
 
         String testFileName = testDirectory + "testCarryFirstLonger.txt";
-        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        TuringMachineReturnCode result = tm.checkIfFileIsAccepted(testFileName);
         assertEquals(TuringMachineReturnCode.ACCEPTED, result);
 
     }
@@ -138,7 +138,7 @@ public class BinaryAdditionTests {
     public void testCarrySecondLonger() {
 
         String testFileName = testDirectory + "testCarrySecondLonger.txt";
-        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        TuringMachineReturnCode result = tm.checkIfFileIsAccepted(testFileName);
         assertEquals(TuringMachineReturnCode.ACCEPTED, result);
 
     }
@@ -150,7 +150,7 @@ public class BinaryAdditionTests {
     public void testReject() {
 
         String testFileName = testDirectory + "testReject.txt";
-        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        TuringMachineReturnCode result = tm.checkIfFileIsAccepted(testFileName);
         assertEquals(TuringMachineReturnCode.REJECTED, result);
 
     }
@@ -162,7 +162,7 @@ public class BinaryAdditionTests {
     public void testInvalidCombination() {
 
         String testFileName = testDirectory + "testInvalidCombination.txt";
-        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        TuringMachineReturnCode result = tm.checkIfFileIsAccepted(testFileName);
         assertEquals(TuringMachineReturnCode.REJECTED, result);
 
     }

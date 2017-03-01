@@ -52,7 +52,7 @@ public class TuringMachineMain {
         /*
         Handle the result from the Turing machine processing the input.
          */
-        handleOutput(tm.checkIfInputIsAccepted(args[INPUT_FINAL_NAME_INDEX]));
+        handleOutput(tm.checkIfFileIsAccepted(args[INPUT_FINAL_NAME_INDEX]));
 
         if(args.length > 2) {
             if (args[PRINT_TAPE_FLAG_INDEX].equals("-v")) {

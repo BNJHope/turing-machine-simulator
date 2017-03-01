@@ -57,7 +57,7 @@ public class ReverseStringTests {
         String testString = "ab";
 
         String testFileName = testDirectory + "testShortAccept.txt";
-        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        TuringMachineReturnCode result = tm.checkIfFileIsAccepted(testFileName);
 
         // check the code is accepted
         assertEquals(TuringMachineReturnCode.ACCEPTED, result);
@@ -83,7 +83,7 @@ public class ReverseStringTests {
         String testString = "abcabcabc";
 
         String testFileName = testDirectory + "testMediumAccept.txt";
-        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        TuringMachineReturnCode result = tm.checkIfFileIsAccepted(testFileName);
 
         // check the code is accepted
         assertEquals(TuringMachineReturnCode.ACCEPTED, result);
@@ -109,7 +109,7 @@ public class ReverseStringTests {
         String testString = "abcabcabcabcabcabcabcabcabcabcabcacbacbbacbacbabcabbacbacbabbacbacbabcabcbac";
 
         String testFileName = testDirectory + "testLongAccept.txt";
-        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        TuringMachineReturnCode result = tm.checkIfFileIsAccepted(testFileName);
 
         // check the code is accepted
         assertEquals(TuringMachineReturnCode.ACCEPTED, result);
@@ -135,7 +135,7 @@ public class ReverseStringTests {
         String testString = "a";
 
         String testFileName = testDirectory + "testOneCharacter.txt";
-        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        TuringMachineReturnCode result = tm.checkIfFileIsAccepted(testFileName);
 
         // check the code is accepted
         assertEquals(TuringMachineReturnCode.ACCEPTED, result);
@@ -160,7 +160,7 @@ public class ReverseStringTests {
         String testString = "";
 
         String testFileName = testDirectory + "testNoCharacter.txt";
-        TuringMachineReturnCode result = tm.checkIfInputIsAccepted(testFileName);
+        TuringMachineReturnCode result = tm.checkIfFileIsAccepted(testFileName);
 
         // check the code is accepted
         assertEquals(TuringMachineReturnCode.ACCEPTED, result);
