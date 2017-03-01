@@ -22,11 +22,30 @@ public class TuringMachineMain {
         final int INPUT_FINAL_NAME_INDEX = 1;
 
         /* Index for where the print flag is. */
-        final int PRINT_TAPE_FLAG_INDEX = 2;
+        final int FLAG_INDEX = 2;
 
-        if(args.length < 2) {
+        /* If there is only one argument and it is the "-d" for data flag then
+        * run the data collection material. */
+        if (args.length == 1 && args[0].equals("-d")) {
+            runDevelopmentData();
+
+        /* Otherwise, close the system if there are not at least 2 arguments. */
+        } else if(args.length < 2) {
             System.err.println("2 arguments needed - machine file and input file");
+            System.exit(1);
+        } else {
+            runTuringMachine(args[MACHINE_FILE_NAME_INDEX], args[INPUT_FINAL_NAME_INDEX], (args.length >= 3 && args[FLAG_INDEX].equals("-v")));
         }
+
+    }
+
+    /**
+     * Main method for running a Turing machine with given machine description file name and input file name.
+     * @param machineDescriptionFileName The name of the file with the Turing machine description.
+     * @param inputFileName The name of the file with the input for the machine.
+     * @param verboseMode Determines if the flag to print tape segment was applied or not.
+     */
+    public static void runTuringMachine(String machineDescriptionFileName, String inputFileName, boolean verboseMode) {
 
         System.out.println("");
         System.out.println("Creating Turing machine...");
@@ -41,7 +60,7 @@ public class TuringMachineMain {
         TuringMachine tm = null;
 
         try {
-            tm = turingMachineFileParser.parseFile(args[MACHINE_FILE_NAME_INDEX]);
+            tm = turingMachineFileParser.parseFile(machineDescriptionFileName);
         } catch (FileNotFoundException e) {
             System.err.println("Turing machine file not found.");
             System.exit(1);
@@ -52,12 +71,10 @@ public class TuringMachineMain {
         /*
         Handle the result from the Turing machine processing the input.
          */
-        handleOutput(tm.checkIfFileIsAccepted(args[INPUT_FINAL_NAME_INDEX]));
+        handleOutput(tm.checkIfFileIsAccepted(inputFileName));
 
-        if(args.length > 2) {
-            if (args[PRINT_TAPE_FLAG_INDEX].equals("-v")) {
-                System.out.println("\nFinal Tape :\n" + tm.getTape());
-            }
+        if(verboseMode) {
+            System.out.println("\nFinal Tape :\n" + tm.getTape());
         }
 
         System.out.println();
@@ -81,5 +98,13 @@ public class TuringMachineMain {
                 break;
         }
 
+    }
+
+    /**
+     * Runs the given data measure function. This was swapped in and out depending on what needed to be printed.
+     */
+    private static void runDevelopmentData() {
+        DataMeasures dataMeasures = new DataMeasures();
+        dataMeasures.printSquareData();
     }
 }

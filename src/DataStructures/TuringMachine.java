@@ -37,6 +37,11 @@ public class TuringMachine {
     private ArrayList<String> alphabet;
 
     /**
+     * The number of transitions made in the last Turing machine cycle.
+     */
+    private long numberOfTransitionsMade;
+
+    /**
      * The label of the start state in the Turing machine.
      */
     private static final String START_LABEL = "q0";
@@ -105,6 +110,9 @@ public class TuringMachine {
         // Get the start state from the collection of states.
         this.currentState = this.states.get(START_LABEL);
 
+        // reset the number of transitions made
+        this.numberOfTransitionsMade = 0;
+
         // While we have not reached a terminating state, operate the machine.
         while (!this.currentState.isTerminatingState()) {
 
@@ -116,6 +124,9 @@ public class TuringMachine {
 
             // the transition that will be made from the state with the given input symbol.
             Transition transitionToMake = currentState.makeTransition(tapeSymbol);
+
+            // increment number of transitions
+            this.numberOfTransitionsMade++;
 
             // set the current state to the state that we go to in the transition.
             this.currentState = transitionToMake.getNextState();
@@ -385,5 +396,13 @@ public class TuringMachine {
         }
 
         return result;
+    }
+
+    /**
+     * Return the number of transitions made in the last Turing machine cycle.
+     * @return the number of transitions made in the last Turing machine cycle.
+     */
+    public long getNumberOfTransitionsMade() {
+        return this.numberOfTransitionsMade;
     }
 }
