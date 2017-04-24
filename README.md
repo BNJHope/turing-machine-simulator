@@ -37,9 +37,3 @@ Every build is clean - therefore, to make a new build of the project, simply run
 in the terminal. However, to entirely remove the build directory, run
 
     $ ant clean
-
-
-View JavaDoc :
---------------
-To view the JavaDoc in a web browser, go to the 'Docs' folder and open the file 'index.html' page into your web browser.
-
