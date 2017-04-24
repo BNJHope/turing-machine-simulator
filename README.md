@@ -1,7 +1,6 @@
-# A simulator for a Turing machine
+# Turing machine Simulator
 
-The program takes test files in the format shown in the machine_input.txt files in the TestFiles directories and
-runs inputs through them to determine if the input is valid with the given input machine.
+This is the first practical in the Third Year Computational Complexity. The program takes test files in the format shown in the machine_input.txt files in the TestFiles directories and runs inputs through them to determine if the input is valid with the given input machine.
 
 The machine input files determine the number of states in the machine and the different inputs required whilst in various states in the machine to determine the result from the transition. I added a comments and whitespace system in the Turing machines files in order to make the files more readable.
 
