@@ -1,4 +1,6 @@
-# A simulator for a Turing machine - it takes test files in the format shown in the machine_input.txt files in the TestFiles directories and
+# A simulator for a Turing machine
+
+The program takes test files in the format shown in the machine_input.txt files in the TestFiles directories and
 runs inputs through them to determine if the input is valid with the given input machine.
 
 Build Instructions :
